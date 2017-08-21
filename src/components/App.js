@@ -4,26 +4,30 @@ import { fetchPosts } from '../actions/index.js';
 
 class App extends Component {
 
-  state = {
-
-  }
-
   componentDidMount() {
     this.props.fetchPosts();
   }
 
   render () {
+    const { posts } = this.props
+
     return (
       <div>
-        Hello world!
+        {Object.keys(posts).map( (key, index) =>
+          <div key={key}>
+            <p>{posts[key].title}</p>
+            <p>{posts[key].author}</p>
+          </div>
+        )}
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ posts }) {
+  console.log(posts);
   return {
-    posts: state.posts
+    posts: posts
   }
 }
 

@@ -3,13 +3,14 @@ import { combineReducers } from 'redux';
 import { FETCH_POSTS } from '../actions';
 
 function posts (state = {}, action) {
+  // console.log("Payload should be stored in this object ", action);
+
   switch (action.type) {
     case FETCH_POSTS :
-      const { posts } = action
+      // const { data } = action.payload
+      // console.log("The posts are: ", data);
 
-      return {
-        posts
-      }
+      return action.payload.data
     default:
       return state;
   }

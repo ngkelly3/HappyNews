@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/index.js';
+import Post from './Post.js'
 
 class ListPosts extends Component {
 
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
   render() {
+
+    const { posts } = this.props;
+    if (!posts) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div>
-        We are listing posts here
+        {Object.keys(posts).map( (key, index) =>
+          <Post key={key} post={ posts[key] } />
+        )}
       </div>
     )
   }
@@ -19,4 +33,4 @@ function mapStateToProps({ posts }) {
   }
 }
 
-export default connect(mapStateToProps)(ListPosts)
+export default connect(mapStateToProps, { fetchPosts })(ListPosts)

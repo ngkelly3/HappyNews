@@ -1,12 +1,16 @@
-export const ADD_RECIPE = 'ADD_RECIPE';
+import axios from 'axios';
+
+export const FETCH_POSTS = 'FETCH_POSTS';
 export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR';
 
-export function addRecipe ({ day, recipe, meal }) {
+
+export function fetchPosts () {
+  const request = axios.get(`http://localhost:5000/posts`, { headers: { Authorization: "lalala" } });
+  console.log(request);
+
   return {
-    type: ADD_RECIPE,
-    recipe,
-    day,
-    meal
+    type: FETCH_POSTS,
+    payload: request
   }
 }
 

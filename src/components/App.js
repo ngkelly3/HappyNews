@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/index.js';
 
 class App extends Component {
 
   state = {
 
+  }
+
+  componentDidMount() {
+    this.props.fetchPosts();
   }
 
   render () {
@@ -16,12 +21,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state = {}) {
-  return {}
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, { fetchPosts })(App)

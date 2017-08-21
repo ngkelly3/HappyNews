@@ -7,12 +7,12 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import promise from 'redux-promise';
 
-import reducer from './reducers';
+import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 const store = createStoreWithMiddleware(
-   reducer, /* preloadedState, */
+   reducers, /* preloadedState, */
    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
  );
 

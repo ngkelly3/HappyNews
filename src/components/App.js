@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/index.js';
+import ListPosts from './ListPosts';
 
 class App extends Component {
 
@@ -13,12 +14,7 @@ class App extends Component {
 
     return (
       <div>
-        {Object.keys(posts).map( (key, index) =>
-          <div key={key}>
-            <p>{posts[key].title}</p>
-            <p>{posts[key].author}</p>
-          </div>
-        )}
+        <ListPosts />
       </div>
     )
   }

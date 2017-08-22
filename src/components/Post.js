@@ -16,11 +16,12 @@ class Post extends Component {
       <div>
         <div className='row'>
             <div className='col-md-4'>
-              <button>Upvote</button>
+              <button className='btn'>Upvote</button>
               {post.voteScore}
-              <button>Downvote</button>
+              <button className='btn'>Downvote</button>
             </div>
             <div className='col-md-6'>{post.title}</div>
+            <button className='btn btn-secondary pull-xs-right'>Post Detail</button>
         </div>
         <div className='row'>
           <div className='col-md-12'>Author: {post.author}</div>

@@ -5,6 +5,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import promise from 'redux-promise';
 
 import reducers from './reducers';
@@ -18,7 +19,9 @@ const store = createStoreWithMiddleware(
 
 ReactDOM.render(
   <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
   </Provider>
   , document.querySelector('.container-fluid'));
 registerServiceWorker();

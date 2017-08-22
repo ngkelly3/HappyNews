@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
-export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR';
-
+export const ACTIVE_POST = 'ACTIVE_POST';
 
 export function fetchPosts () {
   const request = axios.get(`http://localhost:5001/posts`, { headers: { Authorization: "lalala" } });
@@ -14,10 +13,11 @@ export function fetchPosts () {
   }
 }
 
-export function removeFromCalendar ({ day, meal }) {
+export function activePost(id) {
+  console.log(id);
+
   return {
-    type: REMOVE_FROM_CALENDAR,
-    day,
-    meal
+    type: ACTIVE_POST,
+    payload: id
   }
 }

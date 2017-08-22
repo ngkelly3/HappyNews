@@ -18,7 +18,7 @@ class ListPosts extends Component {
 
     return (
       <div>
-        {Object.keys(posts).map( (key, index) =>
+        {Object.keys(posts).map((key, index) =>
           <Post key={key} post={ posts[key] } />
         )}
       </div>

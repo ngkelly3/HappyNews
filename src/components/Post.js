@@ -14,11 +14,17 @@ class Post extends Component {
 
     return(
       <div>
-        <ul>
-          <li>{post.title}</li>
-          <li>{post.author}</li>
-          <li>{post.voteScore}</li>
-        </ul>
+        <div className='row'>
+            <div className='col-md-4'>
+              <button>Upvote</button>
+              {post.voteScore}
+              <button>Downvote</button>
+            </div>
+            <div className='col-md-6'>{post.title}</div>
+        </div>
+        <div className='row'>
+          <div className='col-md-12'>Author: {post.author}</div>
+        </div>
       </div>
     )
   }

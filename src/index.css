@@ -12,7 +12,7 @@ li {
   list-style-type: none;
 }
 
-.container {
+.container-fluid {
   margin: 0 auto;
   max-width: 1070px;
   padding: 20px;

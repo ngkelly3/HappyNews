@@ -9,6 +9,9 @@ class App extends Component {
     return (
       <div>
         <ListPosts />
+        <div className='btn'>
+          Add Post
+        </div>
       </div>
     )
   }

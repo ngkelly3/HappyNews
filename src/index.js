@@ -18,7 +18,7 @@ const store = createStoreWithMiddleware(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+      <App />
   </Provider>
-  , document.getElementById('root'));
+  , document.querySelector('.container-fluid'));
 registerServiceWorker();

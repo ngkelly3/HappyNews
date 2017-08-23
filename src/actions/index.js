@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POST = 'FETCH_POST';
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 const ROOT_URL = 'http://localhost:5001'
 
 let token = localStorage.token
@@ -30,4 +31,15 @@ export function fetchPost(id) {
     type: FETCH_POST,
     payload: request
   }
+}
+
+export function fetchComments(id) {
+
+  const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, { headers });
+
+  return {
+    type: FETCH_COMMENTS,
+    payload: request
+  }
+
 }

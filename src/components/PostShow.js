@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost } from '../actions/index.js';
+import Post from './Post.js'
+import ListComments from './ListComments.js'
 
 class PostShow extends Component {
 
@@ -15,8 +17,13 @@ class PostShow extends Component {
       return <div>Loading...</div>
     }
 
+    const { id } = this.props.match.params;
+
     return (
-      <div>{post.title}</div>
+      <div>
+        <Post post={post} />
+        <ListComments id={id}/>
+      </div>
     )
   }
 }

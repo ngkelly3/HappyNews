@@ -22,10 +22,7 @@ class Post extends Component {
               {post.voteScore}
               <Button bsClass='btn'>Downvote</Button>
             </div>
-            <div className='col-md-6'>{post.title}</div>
-            <Link className='btn btn-secondary' to={`/${post.id}`}>
-              Post Detail
-            </Link>
+            <Link to={`/${post.id}`} className='col-md-6'>{post.title}</Link>
         </div>
         <div className='row'>
           <div className='col-md-12'>Author: {post.author}</div>

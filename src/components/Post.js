@@ -8,6 +8,7 @@ class Post extends Component {
   render() {
 
     const { post } = this.props;
+    const { comment } = this.props;
     if (!post) {
       return (
         <div>Loading...</div>
@@ -27,6 +28,7 @@ class Post extends Component {
         <div className='row'>
           <div className='col-md-12'>Author: {post.author}</div>
         </div>
+        { comment ? <div>{post.body}</div> : <div></div>}
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchComments } from '../actions'
+import Post from './Post.js'
 
 class ListComments extends Component {
 
@@ -16,8 +17,9 @@ class ListComments extends Component {
 
     return(
       <div>
+        <h3>Comments</h3>
         {postComments.map(comment =>
-          <div>{comment.body}</div>
+          <Post key={comment.id} post={comment} comment={true} />
         )}
       </div>
     )

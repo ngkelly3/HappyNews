@@ -19,7 +19,7 @@ class ListPosts extends Component {
     return (
       <div>
         {posts.map((post) =>
-          <Post key={post.id} post={ post } />
+          <Post key={post.id} post={post} comment={false} />
         )}
       </div>
     )

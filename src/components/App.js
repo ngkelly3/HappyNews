@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import ListPosts from './ListPosts';
+import PostShow from './PostShow';
 
 class App extends Component {
 
@@ -10,22 +11,20 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <Route path="/" exact render={() =>
-          <div>
-            <ListPosts />
-            <Button bsClass='btn btn-primary'>
-              Add a post
-            </Button>
-          </div>
-        } />
-        <Route path="/:id" render={() =>
-          <div>
-            A single post should render here
-          </div>
-        }/>
+        <Switch>
+          <Route path="/:id" component={PostShow} />
+          <Route path="/" render={() =>
+            <div>
+              <ListPosts />
+              <Button bsClass='btn btn-primary'>
+                Add a post
+              </Button>
+            </div>
+          }/>
+        </Switch>
       </div>
     )
   }
 }
 
-export default connect()(App)
+export default connect(null, null, null, {pure: false})(App)

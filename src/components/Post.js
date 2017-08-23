@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class Post extends Component {
 
@@ -22,7 +23,9 @@ class Post extends Component {
               <Button bsClass='btn'>Downvote</Button>
             </div>
             <div className='col-md-6'>{post.title}</div>
-            <button className='btn btn-secondary pull-xs-right'>Post Detail</button>
+            <Link className='btn btn-secondary' to={`/${post.id}`}>
+              Post Detail
+            </Link>
         </div>
         <div className='row'>
           <div className='col-md-12'>Author: {post.author}</div>

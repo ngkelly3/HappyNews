@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { fetchPost } from '../actions/index.js';
 
 class PostShow extends Component {
 
+  componentDidMount() {
+    this.props.fetchPost(this.props.match.params.id);
+  }
+
   render() {
+
+    const { post } = this.props;
+    if (!post) {
+      return <div>Loading...</div>
+    }
+
     return (
-      <div>I am a single post that needs to be shown</div>
+      <div>{post.title}</div>
     )
   }
 }
 
-export default connect()(PostShow);
+function mapStateToProps({ activePost }, ownProps) {
+
+  console.log(activePost);
+  return (
+    {
+      post: activePost
+    }
+  )
+}
+
+export default connect(mapStateToProps, { fetchPost })(PostShow);

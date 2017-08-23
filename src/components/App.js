@@ -13,7 +13,7 @@ class App extends Component {
       <div className='app'>
         <Switch>
           <Route path="/:id" component={PostShow} />
-          <Route path="/" render={() =>
+          <Route path="/" exact render={() =>
             <div>
               <ListPosts />
               <Button bsClass='btn btn-primary'>

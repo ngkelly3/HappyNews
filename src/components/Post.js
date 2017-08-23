@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 class Post extends Component {
 
@@ -15,10 +16,10 @@ class Post extends Component {
     return(
       <div>
         <div className='row'>
-            <div className='col-md-4'>
-              <button className='btn'>Upvote</button>
+            <div className='col-md-3'>
+              <Button bsClass='btn'>Upvote</Button>
               {post.voteScore}
-              <button className='btn'>Downvote</button>
+              <Button bsClass='btn'>Downvote</Button>
             </div>
             <div className='col-md-6'>{post.title}</div>
             <button className='btn btn-secondary pull-xs-right'>Post Detail</button>

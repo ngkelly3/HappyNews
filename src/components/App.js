@@ -18,6 +18,11 @@ class App extends Component {
             </Button>
           </div>
         } />
+        <Route path="/:id" render={() =>
+          <div>
+            A single post should render here
+          </div>
+        }/>
       </div>
     )
   }

@@ -18,8 +18,8 @@ class ListPosts extends Component {
 
     return (
       <div>
-        {Object.keys(posts).map((key, index) =>
-          <Post key={key} post={ posts[key] } />
+        {posts.map((post) =>
+          <Post key={post.id} post={ post } />
         )}
       </div>
     )

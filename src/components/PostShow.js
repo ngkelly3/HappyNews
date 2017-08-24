@@ -21,7 +21,7 @@ class PostShow extends Component {
 
     return (
       <div>
-        <Post post={post} />
+        <Post post={post} voteScore={post.voteScore} />
         <div>{post.body}</div>
         <ListComments id={id}/>
       </div>

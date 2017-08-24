@@ -10,7 +10,7 @@ class ListComments extends Component {
   }
 
   render() {
-    const { postComments } = this.props;
+    const { postComments, voteScore } = this.props;
     if (!postComments) {
       return <div>Loading comments...</div>
     }
@@ -19,7 +19,7 @@ class ListComments extends Component {
       <div>
         { postComments.length === 0 ? <div></div> : <h3>Comments</h3> }
         {postComments.map(comment =>
-          <Post key={comment.id} post={comment} comment={true} />
+          <Post key={comment.id} post={comment} voteScore={comment.voteScore} comment={true} />
         )}
       </div>
     )

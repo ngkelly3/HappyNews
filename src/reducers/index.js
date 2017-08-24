@@ -22,6 +22,15 @@ function posts (state = [], action) {
           post.voteScore++;
       })
       return newState;
+    case DOWNVOTE_POST:
+      // console.log("After trying an upvote", action.payload.data.id);
+      newState = [...state];
+      // console.log(newState);
+      newState.map( post => {
+        if (post.id === action.payload.data.id)
+          post.voteScore--;
+      })
+      return newState;
     default:
       return state;
   }
@@ -39,6 +48,10 @@ function activePost (state = {}, action) {
       let newState = {...state};
       newState.voteScore++;
       //console.log("The new score is: ", newState.voteScore)
+      return newState;
+    case DOWNVOTE_POST:
+      newState = {...state};
+      newState.voteScore--;
       return newState;
     default:
       return state;

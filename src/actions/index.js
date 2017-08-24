@@ -7,6 +7,7 @@ export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
+export const CREATE_POST = 'CREATE_POST';
 const ROOT_URL = 'http://localhost:5001'
 
 let token = localStorage.token
@@ -35,6 +36,31 @@ export function fetchPost(id) {
     type: FETCH_POST,
     payload: request
   }
+}
+
+export function createPost(values, callback) {
+
+  // create form input here, send as a PUT request
+  // id:
+  // timestamp:
+  // title:
+  // body:
+  // author:
+  // category:
+  const uuidv4 = require('uuid/v4');
+  var params = {
+    id: uuidv4(),
+    timestamp: Date.now()
+  }
+  console.log(params);
+  console.log(values);
+
+
+  return {
+    type: CREATE_POST,
+    payload: {}
+  }
+
 }
 
 export function upVotePost(id, comment) {

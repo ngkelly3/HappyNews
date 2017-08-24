@@ -29,9 +29,9 @@ class PostShow extends Component {
   }
 }
 
-function mapStateToProps({ activePost }, ownProps) {
+function mapStateToProps({ activePost }) {
 
-  console.log(activePost);
+  console.log("I should be activated after an upvote", activePost);
   return (
     {
       post: activePost

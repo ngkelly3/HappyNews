@@ -17,7 +17,7 @@ class ListComments extends Component {
 
     return(
       <div>
-        <h3>Comments</h3>
+        { postComments.length === 0 ? <div></div> : <h3>Comments</h3> }
         {postComments.map(comment =>
           <Post key={comment.id} post={comment} comment={true} />
         )}

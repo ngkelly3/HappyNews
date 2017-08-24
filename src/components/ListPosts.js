@@ -16,10 +16,12 @@ class ListPosts extends Component {
       return <div>Loading...</div>
     }
 
+    console.log(this.props.posts);
+
     return (
       <div>
         {posts.map((post) =>
-          <Post key={post.id} post={post} comment={false} />
+          <Post key={post.id} post={post} voteScore={post.voteScore} comment={false} />
         )}
       </div>
     )
@@ -27,9 +29,9 @@ class ListPosts extends Component {
 }
 
 function mapStateToProps({ posts }) {
-  console.log(posts);
+  console.log("Should toggle on an upvote", posts);
   return {
-    posts: posts
+    posts
   }
 }
 

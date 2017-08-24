@@ -4,7 +4,9 @@ import { FETCH_POSTS,
          FETCH_POST,
          FETCH_COMMENTS,
          UPVOTE_POST,
-         DOWNVOTE_POST } from '../actions';
+         DOWNVOTE_POST,
+         UPVOTE_COMMENT,
+         DOWNVOTE_COMMENT } from '../actions';
 
 function posts (state = [], action) {
   switch (action.type) {
@@ -17,7 +19,7 @@ function posts (state = [], action) {
       // console.log("After trying an upvote", action.payload.data.id);
       let newState = [...state];
       // console.log(newState);
-      newState.map( post => {
+      newState.forEach( post => {
         if (post.id === action.payload.data.id)
           post.voteScore++;
       })
@@ -26,7 +28,7 @@ function posts (state = [], action) {
       // console.log("After trying an upvote", action.payload.data.id);
       newState = [...state];
       // console.log(newState);
-      newState.map( post => {
+      newState.forEach( post => {
         if (post.id === action.payload.data.id)
           post.voteScore--;
       })
@@ -64,6 +66,22 @@ function postComments (state = [], action) {
       // console.log(action.payload.data)
       action.payload.data.sort((a,b) => b.voteScore - a.voteScore)
       return action.payload.data;
+    case DOWNVOTE_COMMENT:
+      let newState = [...state];
+      // console.log(newState);
+      newState.forEach( comment => {
+        if (comment.id === action.payload.data.id)
+          comment.voteScore--;
+      })
+      return newState;
+    case UPVOTE_COMMENT:
+      newState = [...state];
+      // console.log(newState);
+      newState.forEach( comment => {
+        if (comment.id === action.payload.data.id)
+          comment.voteScore++;
+      })
+      return newState;
     default:
       return state;
   }

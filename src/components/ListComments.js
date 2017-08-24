@@ -10,7 +10,7 @@ class ListComments extends Component {
   }
 
   render() {
-    const { postComments, voteScore } = this.props;
+    const { postComments } = this.props;
     if (!postComments) {
       return <div>Loading comments...</div>
     }

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { upVotePost } from '../actions';
 import { downVotePost } from '../actions';
 
 class Post extends Component {
 
-  upVote = (id) => {
-    this.props.upVotePost(id);
+  upVote = (id, comment) => {
+    this.props.upVotePost(id, comment);
   }
 
-  downVote = (id) => {
-    this.props.downVotePost(id);
+  downVote = (id, comment) => {
+    this.props.downVotePost(id, comment);
   }
 
   render() {
 
-    const { post, comment, voteScore } = this.props;
+    const { post, comment } = this.props;
     if (!post) {
       return (
         <div>Loading...</div>
@@ -30,9 +30,9 @@ class Post extends Component {
       <div>
         <div className='row'>
             <div className='col-md-3'>
-              <Button bsClass='btn' onClick={() => this.upVote(post.id)}>Upvote</Button>
+              <Button bsClass='btn' onClick={() => this.upVote(post.id, comment)}>Upvote</Button>
               {this.props.voteScore}
-              <Button bsClass='btn' onClick={() => this.downVote(post.id)}>Downvote</Button>
+              <Button bsClass='btn' onClick={() => this.downVote(post.id, comment)}>Downvote</Button>
             </div>
             <Link to={`/${post.id}`} className='col-md-6'>{post.title}</Link>
         </div>

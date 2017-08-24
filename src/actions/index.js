@@ -5,6 +5,8 @@ export const FETCH_POST = 'FETCH_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
+export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
+export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 const ROOT_URL = 'http://localhost:5001'
 
 let token = localStorage.token
@@ -35,21 +37,48 @@ export function fetchPost(id) {
   }
 }
 
-export function upVotePost(id) {
+export function upVotePost(id, comment) {
 
-  const request = axios.post(`${ROOT_URL}/posts/${id}`, { option: "upVote" }, { headers });
-  return {
-    type: UPVOTE_POST,
-    payload: request
+  switch (comment) {
+    case false:
+      const request = axios.post(`${ROOT_URL}/posts/${id}`, { option: "upVote" }, { headers });
+      return {
+        type: UPVOTE_POST,
+        payload: request
+      }
+      break;
+    case true:
+      const request2 = axios.post(`${ROOT_URL}/comments/${id}`, { option: "upVote" }, { headers });
+      return {
+        type: UPVOTE_COMMENT,
+        payload: request2
+      }
+      break;
+    default:
+      break;
   }
+
 }
 
-export function downVotePost(id) {
+export function downVotePost(id, comment) {
 
-  const request = axios.post(`${ROOT_URL}/posts/${id}`, { option: "downVote" }, { headers });
-  return {
-    type: DOWNVOTE_POST,
-    payload: request
+  switch (comment) {
+    case false:
+      const request = axios.post(`${ROOT_URL}/posts/${id}`, { option: "downVote" }, { headers });
+      return {
+        type: DOWNVOTE_POST,
+        payload: request
+      }
+      break;
+    case true:
+      const request2 = axios.post(`${ROOT_URL}/comments/${id}`, { option: "downVote" }, { headers });
+      return {
+        type: DOWNVOTE_COMMENT,
+        payload: request2
+      }
+      break;
+    default:
+      break;
   }
 }
 

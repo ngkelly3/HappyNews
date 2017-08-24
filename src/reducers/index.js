@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 import { FETCH_POSTS,
          FETCH_POST,
@@ -44,9 +45,6 @@ function activePost (state = {}, action) {
       //console.log("Payload for fetching a post is", action.payload.data);
       return action.payload.data;
     case UPVOTE_POST:
-      //console.log("After trying an upvote in activePost", state)
-
-      // make a copy of the state so that redux will detect changes
       let newState = {...state};
       newState.voteScore++;
       //console.log("The new score is: ", newState.voteScore)
@@ -91,4 +89,5 @@ export default combineReducers({
   posts,
   activePost,
   postComments,
+  form: formReducer
 })

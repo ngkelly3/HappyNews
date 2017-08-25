@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { createPost } from '../actions';
+import { createComment } from '../actions';
 
-class PostNew extends Component {
+class CommentNew extends Component {
 
     renderField(field) {
     const { meta: { touched, error } } = field;
@@ -25,29 +25,20 @@ class PostNew extends Component {
     );
   }
 
-  onSubmit(values) {
-    console.log("Submission of a post")
-    this.props.createPost(values, () => {
-      this.props.history.push('/');
+  onCommentSubmit(values) {
+    const { id } = this.props.match.params;
+    console.log("The parent id of this post is ", id);
+    this.props.createComment(values, id, () => {
+      this.props.history.push(`/${id}`);
     });
   }
 
   render() {
 
     const { handleSubmit } = this.props;
-
+    const { id } = this.props.match.params;
     return(
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          label="Title"
-          name="title"
-          component={this.renderField}
-        />
-        <Field
-          label="Category"
-          name="category"
-          component={this.renderField}
-        />
+      <form onSubmit={handleSubmit(this.onCommentSubmit.bind(this))}>
         <Field
           label="Body"
           name="body"
@@ -55,7 +46,7 @@ class PostNew extends Component {
         />
         <ButtonGroup>
           <Button type='submit' className='btn btn-primary'>Submit</Button>
-          <Link to='/' className='btn btn-danger'>Cancel</Link>
+          <Link to={`/${id}`} className='btn btn-danger'>Cancel</Link>
         </ButtonGroup>
       </form>
     )
@@ -68,12 +59,6 @@ function validate(values) {
   const errors = {};
 
   // Validate the inputs from 'values' - empty errors object means form is fine
-  if (!values.title || values.title.length < 3) {
-    errors.title = "Enter a title that is at least 3 characters!";
-  }
-  if (!values.category) {
-    errors.category = "Enter some categories";
-  }
   if (!values.body) {
     errors.body = "Enter some content please";
   }
@@ -85,5 +70,5 @@ export default reduxForm({
   validate,
   form: 'PostsNewForm'
 })(
-  connect(null, { createPost })(PostNew)
+  connect(null, { createComment })(CommentNew)
 );

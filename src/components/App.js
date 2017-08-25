@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import ListPosts from './ListPosts';
 import PostShow from './PostShow';
 import PostNew from './PostNew';
+import CommentNew from './CommentNew';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
       <div className='app'>
         <Switch>
           <Route path="/post/new" component={PostNew} />
+          <Route path="/comment/new/:id" component={CommentNew} />
           <Route path="/:id" component={PostShow} />
           <Route path="/" exact render={() =>
             <div>

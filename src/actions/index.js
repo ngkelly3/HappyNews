@@ -8,6 +8,7 @@ export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const CREATE_POST = 'CREATE_POST';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
 const ROOT_URL = 'http://localhost:5001'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -46,10 +47,10 @@ export function createPost(values, callback) {
   var data = {
     id: uuidv4(),
     timestamp: Date.now(),
-    title: title,
-    body: body,
+    title,
+    body,
     author: 'default_author',
-    category: category
+    category
   }
   // console.log(params);
   // console.log(values);
@@ -67,9 +68,42 @@ export function createPost(values, callback) {
     data
   }).then(() => callback());
 
-
   return {
     type: CREATE_POST,
+    payload: {}
+  }
+
+}
+
+export function createComment(values, parentId, callback) {
+
+  const { body } = values;
+  const uuidv4 = require('uuid/v4');
+  var data = {
+    id: uuidv4(),
+    timestamp: Date.now(),
+    body,
+    author: 'default_author',
+    parentId
+  }
+  // console.log(params);
+  // console.log(values);
+  //
+  // const request = axios.post(`${ROOT_URL}/posts`, { data }, { headers })
+  //   .then(() => callback());
+
+  axios({
+    method: 'post',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    url: `${ROOT_URL}/comments`,
+    data
+  }).then(() => callback());
+
+  return {
+    type: CREATE_COMMENT,
     payload: {}
   }
 

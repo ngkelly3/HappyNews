@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost } from '../actions/index.js';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Post from './Post.js'
 import ListComments from './ListComments.js'
 
@@ -25,9 +26,9 @@ class PostShow extends Component {
         <Post post={post} voteScore={post.voteScore} comment={false} />
         <div>{post.body}</div>
         <ListComments id={id}/>
-        <Button bsClass='btn btn-primary'>
+        <Link to={`/comment/new/${id}`} className='btn btn-primary'>
           Add a comment
-        </Button>
+        </Link>
       </div>
     )
   }

@@ -11,7 +11,7 @@ class ListComments extends Component {
 
   render() {
 
-    const { postComments } = this.props;
+    const { postComments, id } = this.props;
     if (!postComments) {
       return <div>Loading comments...</div>
     }

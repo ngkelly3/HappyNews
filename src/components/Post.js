@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { upVotePost } from '../actions';
 import { downVotePost } from '../actions';
@@ -17,7 +17,9 @@ class Post extends Component {
 
   render() {
 
-    const { post, comment } = this.props;
+    const { post, comment, voteScore } = this.props;
+    const { id } = post;
+
     if (!post) {
       return (
         <div>Loading...</div>
@@ -30,11 +32,19 @@ class Post extends Component {
       <div>
         <div className='row'>
             <div className='col-md-3'>
-              <Button bsClass='btn' onClick={() => this.upVote(post.id, comment)}>Upvote</Button>
-              {this.props.voteScore}
-              <Button bsClass='btn' onClick={() => this.downVote(post.id, comment)}>Downvote</Button>
+              <Button bsClass='btn' onClick={() => this.upVote(id, comment)}>Upvote</Button>
+              {voteScore}
+              <Button bsClass='btn' onClick={() => this.downVote(id, comment)}>Downvote</Button>
             </div>
-            <Link to={`/${post.id}`} className='col-md-6'>{post.title}</Link>
+            <Link to={`/${id}`} className='col-md-6'>{post.title}</Link>
+            <div className='col-md-3'>
+              <Button bsClass='btn btn-danger btn-sm' className='pull-xs-right'>
+                delete
+              </Button>
+              <Button bsClass='btn btn-primary btn-sm' className='pull-xs-right'>
+                edit
+              </Button>
+            </div>
         </div>
         <div className='row'>
           <div className='col-md-12'>Author: {post.author}</div>

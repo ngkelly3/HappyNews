@@ -7,7 +7,8 @@ import { FETCH_POSTS,
          UPVOTE_POST,
          DOWNVOTE_POST,
          UPVOTE_COMMENT,
-         DOWNVOTE_COMMENT } from '../actions';
+         DOWNVOTE_COMMENT,
+         CREATE_POST } from '../actions';
 
 function posts (state = [], action) {
   switch (action.type) {
@@ -34,6 +35,9 @@ function posts (state = [], action) {
           post.voteScore--;
       })
       return newState;
+    case CREATE_POST:
+      // We need to add the new post to the state and return the new state
+      return state;
     default:
       return state;
   }

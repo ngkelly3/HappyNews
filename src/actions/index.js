@@ -9,6 +9,7 @@ export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const CREATE_POST = 'CREATE_POST';
 const ROOT_URL = 'http://localhost:5001'
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 let token = localStorage.token
 if (!token)
@@ -40,20 +41,31 @@ export function fetchPost(id) {
 
 export function createPost(values, callback) {
 
-  // create form input here, send as a PUT request
-  // id:
-  // timestamp:
-  // title:
-  // body:
-  // author:
-  // category:
+  const { title, body, category } = values;
   const uuidv4 = require('uuid/v4');
-  var params = {
+  var data = {
     id: uuidv4(),
-    timestamp: Date.now()
+    timestamp: Date.now(),
+    title: title,
+    body: body,
+    author: 'default_author',
+    category: category
   }
-  console.log(params);
-  console.log(values);
+  // console.log(params);
+  // console.log(values);
+  //
+  // const request = axios.post(`${ROOT_URL}/posts`, { data }, { headers })
+  //   .then(() => callback());
+
+  axios({
+    method: 'post',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    url: `${ROOT_URL}/posts`,
+    data
+  }).then(() => callback());
 
 
   return {

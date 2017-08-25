@@ -9,6 +9,7 @@ export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const CREATE_POST = 'CREATE_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const DELETE_POST = 'DELETE_POST';
 const ROOT_URL = 'http://localhost:5001'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -152,6 +153,23 @@ export function downVotePost(id, comment) {
     default:
       break;
   }
+}
+
+export function deletePost(id, comment, callback) {
+
+  switch (comment) {
+    case false:
+      axios.delete(`${ROOT_URL}/posts/${id}`, { headers })
+        .then(() => callback());
+      return {
+        type: DELETE_POST,
+        payload: id
+      }
+      break;
+    default:
+      break;
+  }
+
 }
 
 export function fetchComments(id) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { createPost } from '../actions';
 
 class PostNew extends Component {
@@ -85,5 +85,5 @@ export default reduxForm({
   validate,
   form: 'PostsNewForm'
 })(
-  connect(null, { createPost })(PostNew)
-);
+  withRouter(connect(null, { createPost })(PostNew)
+));

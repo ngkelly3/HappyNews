@@ -9,18 +9,20 @@ import { FETCH_POSTS,
          UPVOTE_COMMENT,
          DOWNVOTE_COMMENT,
          CREATE_POST,
-         CREATE_COMMENT } from '../actions';
+         CREATE_COMMENT,
+         DELETE_POST } from '../actions';
 
 function posts (state = [], action) {
   switch (action.type) {
     case FETCH_POSTS:
       // console.log("Payload should be stored in this object ", action);
       // sort the list by score and return it
-      action.payload.data.sort((a,b) => b.voteScore - a.voteScore)
-      return action.payload.data;
+      let newState = action.payload.data.filter(post => !post.deleted)
+        .sort((a,b) => b.voteScore - a.voteScore);
+      return newState;
     case UPVOTE_POST:
       // console.log("After trying an upvote", action.payload.data.id);
-      let newState = [...state];
+      newState = [...state];
       // console.log(newState);
       newState.forEach( post => {
         if (post.id === action.payload.data.id)
@@ -39,6 +41,9 @@ function posts (state = [], action) {
     case CREATE_POST:
       // We need to add the new post to the state and return the new state
 
+      return state;
+    case DELETE_POST:
+      console.log("testing id payload", action.payload)
       return state;
     default:
       return state;

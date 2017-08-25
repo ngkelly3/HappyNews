@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ButtonGroup, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { upVotePost } from '../actions';
-import { downVotePost } from '../actions';
+import { Link, withRouter } from 'react-router-dom';
+import { upVotePost, downVotePost, deletePost } from '../actions';
 
 class Post extends Component {
 
@@ -13,6 +12,12 @@ class Post extends Component {
 
   downVote = (id, comment) => {
     this.props.downVotePost(id, comment);
+  }
+
+  deletePost = (id, comment) => {
+    this.props.deletePost(id, comment, () => {
+      this.props.history.push('/');
+    });
   }
 
   render() {
@@ -38,10 +43,15 @@ class Post extends Component {
             </div>
             <Link to={`/${id}`} className='col-md-6'>{post.title}</Link>
             <div className='col-md-3'>
-              <Button bsClass='btn btn-danger btn-sm' className='pull-xs-right'>
+              <Button bsClass='btn btn-danger btn-sm'
+                      onClick={() => this.deletePost(id, comment)}
+                      className='pull-xs-right'
+              >
                 delete
               </Button>
-              <Button bsClass='btn btn-primary btn-sm' className='pull-xs-right'>
+              <Button bsClass='btn btn-primary btn-sm'
+                      className='pull-xs-right'
+              >
                 edit
               </Button>
             </div>
@@ -56,4 +66,4 @@ class Post extends Component {
 }
 
 
-export default connect(null, { upVotePost, downVotePost })(Post)
+export default withRouter(connect(null, { upVotePost, downVotePost, deletePost })(Post))

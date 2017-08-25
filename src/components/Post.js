@@ -14,10 +14,16 @@ class Post extends Component {
     this.props.downVotePost(id, comment);
   }
 
-  deletePost = (id, comment) => {
-    this.props.deletePost(id, comment, () => {
-      this.props.history.push('/');
-    });
+  deletePost = (post, comment) => {
+    if (comment) {
+      this.props.deletePost(post.id, comment, () => {
+        this.props.history.push(`/${post.parentId}`);
+      });
+    } else {
+      this.props.deletePost(post.id, comment, () => {
+        this.props.history.push('/');
+      });
+    }
   }
 
   render() {
@@ -44,7 +50,7 @@ class Post extends Component {
             <Link to={`/${id}`} className='col-md-6'>{post.title}</Link>
             <div className='col-md-3'>
               <Button bsClass='btn btn-danger btn-sm'
-                      onClick={() => this.deletePost(id, comment)}
+                      onClick={() => this.deletePost(post, comment)}
                       className='pull-xs-right'
               >
                 delete
@@ -65,5 +71,13 @@ class Post extends Component {
   }
 }
 
+function mapStateToProps({ comments }, ownProps) {
 
-export default withRouter(connect(null, { upVotePost, downVotePost, deletePost })(Post))
+  return {
+    comments
+  }
+
+}
+
+
+export default withRouter(connect(mapStateToProps, { upVotePost, downVotePost, deletePost })(Post))

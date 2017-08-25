@@ -10,7 +10,8 @@ import { FETCH_POSTS,
          DOWNVOTE_COMMENT,
          CREATE_POST,
          CREATE_COMMENT,
-         DELETE_POST } from '../actions';
+         DELETE_POST,
+         DELETE_COMMENT } from '../actions';
 
 function posts (state = [], action) {
   switch (action.type) {
@@ -73,10 +74,11 @@ function postComments (state = [], action) {
   switch(action.type) {
     case FETCH_COMMENTS:
       // console.log(action.payload.data)
-      action.payload.data.sort((a,b) => b.voteScore - a.voteScore)
-      return action.payload.data;
+      let newState = action.payload.data.filter(comment => !comment.deleted && !comment.parentDeleted)
+        .sort((a,b) => b.voteScore - a.voteScore)
+      return newState;
     case DOWNVOTE_COMMENT:
-      let newState = [...state];
+      newState = [...state];
       // console.log(newState);
       newState.forEach( comment => {
         if (comment.id === action.payload.data.id)
@@ -93,6 +95,9 @@ function postComments (state = [], action) {
       return newState;
     case CREATE_COMMENT:
       return state;
+    case DELETE_COMMENT:
+      newState = state.filter(comment => comment.id !== action.payload);
+      return newState;
     default:
       return state;
   }

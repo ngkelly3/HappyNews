@@ -10,6 +10,7 @@ export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const CREATE_POST = 'CREATE_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 const ROOT_URL = 'http://localhost:5001'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -163,6 +164,14 @@ export function deletePost(id, comment, callback) {
         .then(() => callback());
       return {
         type: DELETE_POST,
+        payload: id
+      }
+      break;
+    case true:
+      axios.delete(`${ROOT_URL}/comments/${id}`, { headers })
+        .then(() => callback());
+      return {
+        type: DELETE_COMMENT,
         payload: id
       }
       break;

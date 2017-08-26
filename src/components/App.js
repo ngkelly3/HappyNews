@@ -19,8 +19,10 @@ class App extends Component {
                 <Link to="/">Home</Link>
               </Navbar.Brand>
           </Navbar.Header>
-            <Nav>
-              <NavItem eventKey={1} href="#">Link</NavItem>
+            <Nav pullRight>
+              <NavItem eventKey={1}>
+                <Link className='btn btn-primary' to="/post/new/">Add a post</Link>
+              </NavItem>
             </Nav>
         </Navbar>
         <Switch>
@@ -29,14 +31,7 @@ class App extends Component {
           <Route path="/comment/edit/:category/:commentId/:parentId" component={CommentNew} />
           <Route path="/comment/new/:category/:parentId" component={CommentNew} />
           <Route path="/:category/:id" component={PostShow} />
-          <Route path="/" exact render={() =>
-            <div>
-              <ListPosts />
-              <Link to="/post/new" className='btn btn-primary'>
-                Add a post
-              </Link>
-            </div>
-          }/>
+          <Route path="/" component={ListPosts} />
         </Switch>
       </div>
     )

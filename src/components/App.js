@@ -13,7 +13,7 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <Navbar inverse collapseOnSelect>
+        <Navbar collapseOnSelect>
           <Navbar.Header>
               <Navbar.Brand>
                 <Link to="/">Home</Link>

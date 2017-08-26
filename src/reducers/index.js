@@ -44,11 +44,11 @@ function posts (state = [], action) {
       return newState;
     case CREATE_POST:
       // We need to add the new post to the state and return the new state
-
       return state;
     case DELETE_POST:
       console.log("testing id payload", action.payload)
-      return state;
+      newState = state.filter(post => post.id !== action.payload);
+      return newState;
     default:
       return state;
   }

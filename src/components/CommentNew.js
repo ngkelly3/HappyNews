@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { createComment, fetchComment } from '../actions';
+import { createComment, fetchComment, editComment } from '../actions';
 
 class CommentNew extends Component {
 
@@ -34,11 +34,17 @@ class CommentNew extends Component {
   }
 
   onCommentSubmit(values) {
-    const { parentId, category } = this.props.match.params;
+    const { parentId, category, commentId } = this.props.match.params;
     console.log("The parent id of this post is ", parentId);
-    this.props.createComment(values, parentId, () => {
-      this.props.history.push(`/${category}/${parentId}`);
-    });
+    if (!commentId) {
+      this.props.createComment(values, parentId, () => {
+        this.props.history.push(`/${category}/${parentId}`);
+      });
+    } else {
+      this.props.editComment(values, commentId, () => {
+        this.props.history.push(`/${category}/${parentId}`);
+      });
+    }
   }
 
   render() {
@@ -110,6 +116,6 @@ CommentNew = reduxForm({
   enableReinitialize: true
 })(CommentNew);
 
-CommentNew = withRouter(connect(mapStateToProps, { createComment, fetchComment })(CommentNew))
+CommentNew = withRouter(connect(mapStateToProps, { createComment, fetchComment, editComment })(CommentNew))
 
 export default CommentNew;

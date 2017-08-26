@@ -12,7 +12,8 @@ import { FETCH_POSTS,
          CREATE_POST,
          CREATE_COMMENT,
          DELETE_POST,
-         DELETE_COMMENT } from '../actions';
+         DELETE_COMMENT,
+         EDIT_COMMENT } from '../actions';
 
 function posts (state = [], action) {
   switch (action.type) {
@@ -109,6 +110,8 @@ function activeComment (state = {}, action) {
     case FETCH_COMMENT:
       console.log("Payload for fetching a comment is", action.payload.data);
       return action.payload.data;
+    case EDIT_COMMENT:
+      return state;
     default:
       return state;
   }

@@ -12,6 +12,7 @@ export const CREATE_POST = 'CREATE_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
 const ROOT_URL = 'http://localhost:5001'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -183,14 +184,11 @@ export function deletePost(id, comment, callback) {
 }
 
 export function fetchComments(id) {
-
   const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, { headers });
-
   return {
     type: FETCH_COMMENTS,
     payload: request
   }
-
 }
 
 export function fetchComment(id) {
@@ -199,5 +197,29 @@ export function fetchComment(id) {
   return {
     type: FETCH_COMMENT,
     payload: request
+  }
+}
+
+export function editComment(values, id, callback) {
+
+  const { body } = values;
+  var data = {
+    timestamp: Date.now(),
+    body
+  }
+
+  axios({
+    method: 'put',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    url: `${ROOT_URL}/comments/${id}`,
+    data
+  }).then(() => callback());
+  // console.log(request);
+  return {
+    type: EDIT_COMMENT,
+    payload: {}
   }
 }

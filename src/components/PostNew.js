@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { createPost, fetchPost } from '../actions';
+import { createPost, fetchPost, editPost } from '../actions';
 
 class PostNew extends Component {
 
@@ -36,9 +36,16 @@ class PostNew extends Component {
 
   onSubmit(values) {
     // console.log("Submission of a post")
-    this.props.createPost(values, () => {
-      this.props.history.push('/');
-    })
+    const { id, category } = this.props.match.params;
+    if ( !id ) {
+      this.props.createPost(values, () => {
+        this.props.history.push('/');
+      })
+    } else {
+      this.props.editPost(values, id, () => {
+        this.props.history.push(`/${category}/${id}`);
+      })
+    }
   }
 
   render() {
@@ -127,6 +134,6 @@ PostNew = reduxForm({
   enableReinitialize: true
 })(PostNew);
 
-PostNew = withRouter(connect(mapStateToProps, { fetchPost, createPost })(PostNew))
+PostNew = withRouter(connect(mapStateToProps, { fetchPost, createPost, editPost })(PostNew))
 
 export default PostNew;

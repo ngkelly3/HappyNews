@@ -13,7 +13,8 @@ export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
-const ROOT_URL = 'http://localhost:5001'
+export const EDIT_POST = 'EDIT_POST';
+const ROOT_URL = 'http://localhost:5001';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 let token = localStorage.token
@@ -222,4 +223,29 @@ export function editComment(values, id, callback) {
     type: EDIT_COMMENT,
     payload: {}
   }
+}
+
+export function editPost(values, id, callback) {
+  const { title, body } = values;
+  var data = {
+    timestamp: Date.now(),
+    body,
+    title
+  }
+
+  axios({
+    method: 'put',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    url: `${ROOT_URL}/posts/${id}`,
+    data
+  }).then(() => callback());
+
+  return {
+    type: EDIT_POST,
+    payload: {}
+  }
+
 }

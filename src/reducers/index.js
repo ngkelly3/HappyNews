@@ -13,7 +13,8 @@ import { FETCH_POSTS,
          CREATE_COMMENT,
          DELETE_POST,
          DELETE_COMMENT,
-         EDIT_COMMENT } from '../actions';
+         EDIT_COMMENT,
+         EDIT_POST } from '../actions';
 
 function posts (state = [], action) {
   switch (action.type) {
@@ -67,6 +68,8 @@ function activePost (state = {}, action) {
       newState = {...state};
       newState.voteScore--;
       return newState;
+    case EDIT_POST:
+      return state;
     default:
       return state;
   }

@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, initialize } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { createComment } from '../actions';
 
 class CommentNew extends Component {
 
-    renderField(field) {
+  componentDidMount() {
+    this.handleInitialize();
+  }
+
+  handleInitialize() {
+    const initData = {
+      body: 'body'
+    };
+
+    this.props.initialize(initData);
+  }
+
+  renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? 'has-danger' : ''}`
     return (
@@ -26,10 +38,10 @@ class CommentNew extends Component {
   }
 
   onCommentSubmit(values) {
-    const { id } = this.props.match.params;
+    const { id, category } = this.props.match.params;
     console.log("The parent id of this post is ", id);
     this.props.createComment(values, id, () => {
-      this.props.history.push(`/${id}`);
+      this.props.history.push(`/${category}/${id}`);
     });
   }
 
@@ -52,6 +64,14 @@ class CommentNew extends Component {
     )
   }
 
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    initialValues: {
+      body: 'body'
+    }
+  }
 }
 
 // called whenever user tries to submit a form

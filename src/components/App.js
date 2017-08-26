@@ -16,7 +16,7 @@ class App extends Component {
         <Switch>
           <Route path="/post/new" component={PostNew} />
           <Route path="/comment/new/:id" component={CommentNew} />
-          <Route path="/:id" component={PostShow} />
+          <Route path="/:category/:id" component={PostShow} />
           <Route path="/" exact render={() =>
             <div>
               <ListPosts />

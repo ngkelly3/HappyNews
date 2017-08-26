@@ -1,29 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, initialize } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { createPost } from '../actions';
 
 class PostNew extends Component {
 
-    renderField(field) {
-    const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? 'has-danger' : ''}`
-    return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <input
-          className='form-control'
-          type="text"
-          {...field.input}
-        />
-        <div className='text-help'>
-          {touched ? error : ''}
-        </div>
-      </div>
-    );
+  componentDidMount() {
+      this.handleInitialize();
   }
+
+  handleInitialize() {
+
+    const { id } = this.props.match.params;
+
+    if (id) {
+      const initData = {
+        body: 'body'
+      };
+
+      this.props.initialize(initData);
+    }
+  }
+
+    renderField(field) {
+
+      const { meta: { touched, error } } = field;
+      const className = `form-group ${touched && error ? 'has-danger' : ''}`
+      return (
+        <div className={className}>
+          <label>{field.label}</label>
+          <input
+            className='form-control'
+            type="text"
+            {...field.input}
+          />
+          <div className='text-help'>
+            {touched ? error : ''}
+          </div>
+        </div>
+      );
+    }
 
   onSubmit(values) {
     console.log("Submission of a post")
@@ -34,7 +52,7 @@ class PostNew extends Component {
 
   render() {
 
-    const { handleSubmit } = this.props;
+    const { handleSubmit } = this.props
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>

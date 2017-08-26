@@ -29,7 +29,7 @@ class ListPosts extends Component {
 }
 
 function mapStateToProps({ posts }) {
-  console.log("Should toggle on an upvote", posts);
+  //console.log("Should toggle on an upvote", posts);
   return {
     posts
   }

@@ -14,10 +14,11 @@ class Post extends Component {
     this.props.downVotePost(id, comment);
   }
 
-  deletePost = (post, comment) => {
+  deletePost = (post, category, comment) => {
+
     if (comment) {
       this.props.deletePost(post.id, comment, () => {
-        this.props.history.push(`/${post.parentId}`);
+        this.props.history.push(`/${category}/${post.parentId}`);
       });
     } else {
       this.props.deletePost(post.id, comment, () => {
@@ -26,10 +27,16 @@ class Post extends Component {
     }
   }
 
+  editPost = (post, comment) => {
+    if (comment) {
+
+    }
+  }
+
   render() {
 
     const { post, comment, voteScore } = this.props;
-    const { id } = post;
+    const { id, category } = post;
 
     if (!post) {
       return (
@@ -47,15 +54,16 @@ class Post extends Component {
               {voteScore}
               <Button bsClass='btn' onClick={() => this.downVote(id, comment)}>Downvote</Button>
             </div>
-            <Link to={`/${id}`} className='col-md-6'>{post.title}</Link>
+            <Link to={`/${category}/${id}`} className='col-md-6'>{post.title}</Link>
             <div className='col-md-3'>
               <Button bsClass='btn btn-danger btn-sm'
-                      onClick={() => this.deletePost(post, comment)}
+                      onClick={() => this.deletePost(post, category, comment)}
                       className='pull-xs-right'
               >
                 delete
               </Button>
               <Button bsClass='btn btn-primary btn-sm'
+                      onClick={() => this.editPost(post, comment)}
                       className='pull-xs-right'
               >
                 edit

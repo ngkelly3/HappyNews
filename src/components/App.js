@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
-import Modal from 'react-modal';
+import { Navbar, NavItem, NavbarHeader, Nav }  from 'react-bootstrap';
 import ListPosts from './ListPosts';
 import PostShow from './PostShow';
 import PostNew from './PostNew';
@@ -13,6 +13,16 @@ class App extends Component {
 
     return (
       <div className='app'>
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+              <Navbar.Brand>
+                <Link to="/">Home</Link>
+              </Navbar.Brand>
+          </Navbar.Header>
+            <Nav>
+              <NavItem eventKey={1} href="#">Link</NavItem>
+            </Nav>
+        </Navbar>
         <Switch>
           <Route path="/post/new/" component={PostNew} />
           <Route path="/post/edit/:category/:id" component={PostNew} />

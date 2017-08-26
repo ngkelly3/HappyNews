@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { createPost, fetchPost, editPost } from '../actions';
@@ -50,12 +50,7 @@ class PostNew extends Component {
 
   render() {
 
-    const { handleSubmit, post, id } = this.props
-    // if (!post) {
-    //   return <div></div>
-    // }
-
-    // this.handleInitialize();
+    const { handleSubmit } = this.props
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>

@@ -3,6 +3,7 @@ import axios from 'axios';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+export const FETCH_COMMENT = 'FETCH_COMMENT';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
@@ -190,4 +191,13 @@ export function fetchComments(id) {
     payload: request
   }
 
+}
+
+export function fetchComment(id) {
+  const request = axios.get(`${ROOT_URL}/comments/${id}`, { headers });
+  // console.log(request);
+  return {
+    type: FETCH_COMMENT,
+    payload: request
+  }
 }

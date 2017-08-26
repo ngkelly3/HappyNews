@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { upVotePost, downVotePost, deletePost } from '../actions';
 
@@ -30,12 +30,17 @@ class Post extends Component {
   render() {
 
     const { post, comment, voteScore } = this.props;
-    const { id, category } = post;
-
+    const { id } = post;
+    let { category } = post;
+    const { parentId } = post;
     if (!post) {
       return (
         <div>Loading...</div>
       )
+    }
+
+    if (!category) {
+      category = this.props.match.params.category;
     }
 
     console.log("The post is:", post);
@@ -56,11 +61,18 @@ class Post extends Component {
               >
                 delete
               </Button>
-              <Link className='btn btn-primary btn-sm pull-xs-right'
-                      to={`/post/edit/${category}/${id}`}
-              >
-                edit
-              </Link>
+              { comment ?
+                <Link className='btn btn-primary btn-sm pull-xs-right'
+                        to={`/comment/edit/${category}/${id}/${parentId}`}
+                >
+                  edit
+                </Link> :
+                <Link className='btn btn-primary btn-sm pull-xs-right'
+                        to={`/post/edit/${category}/${id}`}
+                >
+                  edit
+                </Link>
+              }
             </div>
         </div>
         <div className='row'>
@@ -73,11 +85,9 @@ class Post extends Component {
 }
 
 function mapStateToProps({ comments }, ownProps) {
-
   return {
     comments
   }
-
 }
 
 

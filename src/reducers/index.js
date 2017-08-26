@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 import { FETCH_POSTS,
          FETCH_POST,
          FETCH_COMMENTS,
+         FETCH_COMMENT,
          UPVOTE_POST,
          DOWNVOTE_POST,
          UPVOTE_COMMENT,
@@ -103,9 +104,20 @@ function postComments (state = [], action) {
   }
 }
 
+function activeComment (state = {}, action) {
+  switch (action.type) {
+    case FETCH_COMMENT:
+      console.log("Payload for fetching a comment is", action.payload.data);
+      return action.payload.data;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   posts,
   activePost,
   postComments,
+  activeComment,
   form: formReducer
 })

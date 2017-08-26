@@ -9,31 +9,10 @@ class PostNew extends Component {
 
   componentDidMount() {
       const { id } = this.props.match.params;
-
+      // console.log ("Testing value of id", id);
       if (id) {
         this.props.fetchPost(id);
-        //this.handleInitialize();
       }
-  }
-
-  handleInitialize() {
-
-    console.log("I am initializing form data")
-    const { id, category  } = this.props.match.params;
-    // console.log(this.props.post);
-
-    if (id) {
-
-      const { title, category, body } = this.props.post;
-
-      const initData = {
-        title,
-        category,
-        body
-      };
-
-      this.props.initialize(initData);
-    }
   }
 
     renderField(field) {
@@ -56,10 +35,10 @@ class PostNew extends Component {
     }
 
   onSubmit(values) {
-    console.log("Submission of a post")
+    // console.log("Submission of a post")
     this.props.createPost(values, () => {
       this.props.history.push('/');
-    });
+    })
   }
 
   render() {
@@ -101,13 +80,24 @@ class PostNew extends Component {
 function mapStateToProps({ activePost }, ownProps) {
 
   const { title, category, body } = activePost;
+  const { id } = ownProps.match.params;
   console.log(activePost)
 
-  return {
-    initialValues: {
-      title,
-      category,
-      body
+  if (id) {
+    return {
+      initialValues: {
+        title,
+        category,
+        body
+      }
+    }
+  } else {
+    return {
+      initialValues: {
+        title: "",
+        category: "",
+        body: ""
+      }
     }
   }
 

@@ -20,13 +20,14 @@ class PostShow extends Component {
     }
 
     const { id } = this.props.match.params;
+    const { category } = post;
 
     return (
       <div>
         <Post post={post} voteScore={post.voteScore} comment={false} />
         <div>{post.body}</div>
         <ListComments id={id}/>
-        <Link to={`/comment/new/${id}`} className='btn btn-primary'>
+        <Link to={`/comment/new/${category}/${id}`} className='btn btn-primary'>
           Add a comment
         </Link>
       </div>

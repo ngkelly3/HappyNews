@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { createComment } from '../actions';
+import { Link, withRouter } from 'react-router-dom';
+import { createComment, fetchComment } from '../actions';
 
 class CommentNew extends Component {
 
   componentDidMount() {
-    this.handleInitialize();
-  }
-
-  handleInitialize() {
-    const initData = {
-      body: 'body'
-    };
-
-    this.props.initialize(initData);
+      const { commentId } = this.props.match.params;
+      console.log ("Testing value of id", commentId);
+      if (commentId) {
+        this.props.fetchComment(commentId);
+      }
   }
 
   renderField(field) {
@@ -38,17 +34,26 @@ class CommentNew extends Component {
   }
 
   onCommentSubmit(values) {
-    const { id, category } = this.props.match.params;
-    console.log("The parent id of this post is ", id);
-    this.props.createComment(values, id, () => {
-      this.props.history.push(`/${category}/${id}`);
+    const { parentId, category } = this.props.match.params;
+    console.log("The parent id of this post is ", parentId);
+    this.props.createComment(values, parentId, () => {
+      this.props.history.push(`/${category}/${parentId}`);
     });
   }
 
   render() {
 
     const { handleSubmit } = this.props;
-    const { id } = this.props.match.params;
+    let { commentId, category, parentId } = this.props.match.params;
+
+    if (!commentId) {
+      commentId = this.props.id;
+    }
+
+    if (!parentId) {
+      parentId = this.props.id;
+    }
+
     return(
       <form onSubmit={handleSubmit(this.onCommentSubmit.bind(this))}>
         <Field
@@ -58,7 +63,7 @@ class CommentNew extends Component {
         />
         <ButtonGroup>
           <Button type='submit' className='btn btn-primary'>Submit</Button>
-          <Link to={`/${id}`} className='btn btn-danger'>Cancel</Link>
+          <Link to={`/${category}/${parentId}`} className='btn btn-danger'>Cancel</Link>
         </ButtonGroup>
       </form>
     )
@@ -66,10 +71,23 @@ class CommentNew extends Component {
 
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps({ activeComment }, ownProps) {
+  console.log(activeComment);
+
+  const { commentId } = ownProps.match.params;
+  const { body } = activeComment;
+
+  if (commentId) {
   return {
     initialValues: {
-      body: 'body'
+      body
+    }
+  }
+  } else {
+    return {
+      initialValues: {
+        body: ""
+      }
     }
   }
 }
@@ -86,10 +104,12 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
+CommentNew = reduxForm({
   validate,
-  form: 'PostsNewForm',
+  form: 'CommentNew',
   enableReinitialize: true
-})(
-  connect(null, { createComment })(CommentNew)
-);
+})(CommentNew);
+
+CommentNew = withRouter(connect(mapStateToProps, { createComment, fetchComment })(CommentNew))
+
+export default CommentNew;

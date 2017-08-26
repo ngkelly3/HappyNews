@@ -27,12 +27,6 @@ class Post extends Component {
     }
   }
 
-  editPost = (post, comment) => {
-    if (comment) {
-
-    }
-  }
-
   render() {
 
     const { post, comment, voteScore } = this.props;
@@ -62,12 +56,11 @@ class Post extends Component {
               >
                 delete
               </Button>
-              <Button bsClass='btn btn-primary btn-sm'
-                      onClick={() => this.editPost(post, comment)}
-                      className='pull-xs-right'
+              <Link className='btn btn-primary btn-sm pull-xs-right'
+                      to={`/post/edit/${category}/${id}`}
               >
                 edit
-              </Button>
+              </Link>
             </div>
         </div>
         <div className='row'>

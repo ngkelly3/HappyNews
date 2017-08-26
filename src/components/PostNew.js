@@ -3,21 +3,33 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { createPost } from '../actions';
+import { createPost, fetchPost } from '../actions';
 
 class PostNew extends Component {
 
   componentDidMount() {
-      this.handleInitialize();
+      const { id } = this.props.match.params;
+
+      if (id) {
+        this.props.fetchPost(id);
+        //this.handleInitialize();
+      }
   }
 
   handleInitialize() {
 
-    const { id } = this.props.match.params;
+    console.log("I am initializing form data")
+    const { id, category  } = this.props.match.params;
+    // console.log(this.props.post);
 
     if (id) {
+
+      const { title, category, body } = this.props.post;
+
       const initData = {
-        body: 'body'
+        title,
+        category,
+        body
       };
 
       this.props.initialize(initData);
@@ -52,7 +64,12 @@ class PostNew extends Component {
 
   render() {
 
-    const { handleSubmit } = this.props
+    const { handleSubmit, post, id } = this.props
+    // if (!post) {
+    //   return <div></div>
+    // }
+
+    // this.handleInitialize();
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -81,6 +98,21 @@ class PostNew extends Component {
 
 }
 
+function mapStateToProps({ activePost }, ownProps) {
+
+  const { title, category, body } = activePost;
+  console.log(activePost)
+
+  return {
+    initialValues: {
+      title,
+      category,
+      body
+    }
+  }
+
+}
+
 // called whenever user tries to submit a form
 function validate(values) {
   const errors = {};
@@ -99,9 +131,12 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
+PostNew = reduxForm({
   validate,
-  form: 'PostsNewForm'
-})(
-  withRouter(connect(null, { createPost })(PostNew)
-));
+  form: 'PostNew',
+  enableReinitialize: true
+})(PostNew);
+
+PostNew = withRouter(connect(mapStateToProps, { fetchPost, createPost })(PostNew))
+
+export default PostNew;

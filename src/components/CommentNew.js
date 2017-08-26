@@ -88,7 +88,8 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'PostsNewForm'
+  form: 'PostsNewForm',
+  enableReinitialize: true
 })(
   connect(null, { createComment })(CommentNew)
 );

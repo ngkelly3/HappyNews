@@ -4,6 +4,7 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const FETCH_COMMENT = 'FETCH_COMMENT';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
@@ -41,6 +42,15 @@ export function fetchPost(id) {
 
   return {
     type: FETCH_POST,
+    payload: request
+  }
+}
+
+export function fetchCategories() {
+  const request = axios.get(`${ROOT_URL}/categories`, { headers });
+
+  return {
+    type: FETCH_CATEGORIES,
     payload: request
   }
 }

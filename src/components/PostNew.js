@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import DropdownList from 'react-widgets/lib/DropdownList'
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { createPost, fetchPost, editPost } from '../actions';
+import { createPost, fetchPost, editPost, fetchCategories } from '../actions';
 import 'react-widgets/dist/css/react-widgets.css'
 
 class PostNew extends Component {
@@ -15,6 +14,7 @@ class PostNew extends Component {
       if (id) {
         this.props.fetchPost(id);
       }
+      this.props.fetchCategories();
   }
 
     renderField(field) {
@@ -47,16 +47,24 @@ class PostNew extends Component {
 
     renderCategory(field) {
 
+      const { categories } = field.data;
+      console.log(categories);
+
       const { meta: { touched, error } } = field;
       const className = `form-group ${touched && error ? 'has-danger' : ''}`
       return (
         <div className={className}>
           <label>{field.label}</label>
-          <input
+          <select
             className='form-control'
-            type="text"
             {...field.input}
-          />
+          >
+            {
+              categories === undefined ? <option>Loading...</option> :
+              categories.map((category) => <option key={category.name}>{category.name}</option>)
+            }
+
+          </select>
           <div className='text-help'>
             {touched ? error : ''}
           </div>
@@ -80,11 +88,15 @@ class PostNew extends Component {
 
   render() {
 
-    const { handleSubmit } = this.props
-    const colors = [ { color: 'Red', value: 'ff0000' },
-  { color: 'Green', value: '00ff00' },
-  { color: 'Blue', value: '0000ff' } ]
+    const { handleSubmit } = this.props;
+    const { categories } = this.props;
+    if (!categories) {
+      return(
+        <div>Loading...</div>
+      )
+    }
 
+    console.log(categories);
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -93,10 +105,11 @@ class PostNew extends Component {
           name="title"
           component={this.renderField}
         />
-        <label>Category</label>
         <Field
+          label="Category"
           name="category"
-          component={this.renderField}
+          data={categories}
+          component={this.renderCategory}
         />
         <Field
           label="Body"
@@ -113,7 +126,7 @@ class PostNew extends Component {
 
 }
 
-function mapStateToProps({ activePost }, ownProps) {
+function mapStateToProps({ activePost, categories }, ownProps) {
 
   const { title, category, body } = activePost;
   const { id } = ownProps.match.params;
@@ -125,7 +138,8 @@ function mapStateToProps({ activePost }, ownProps) {
         title,
         category,
         body
-      }
+      },
+      categories
     }
   } else {
     return {
@@ -133,7 +147,8 @@ function mapStateToProps({ activePost }, ownProps) {
         title: "",
         category: "",
         body: ""
-      }
+      },
+      categories
     }
   }
 
@@ -163,6 +178,6 @@ PostNew = reduxForm({
   enableReinitialize: true
 })(PostNew);
 
-PostNew = withRouter(connect(mapStateToProps, { fetchPost, createPost, editPost })(PostNew))
+PostNew = withRouter(connect(mapStateToProps, { fetchPost, createPost, editPost, fetchCategories })(PostNew))
 
 export default PostNew;

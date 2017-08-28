@@ -5,6 +5,7 @@ import { FETCH_POSTS,
          FETCH_POST,
          FETCH_COMMENTS,
          FETCH_COMMENT,
+         FETCH_CATEGORIES,
          UPVOTE_POST,
          DOWNVOTE_POST,
          UPVOTE_COMMENT,
@@ -120,10 +121,20 @@ function activeComment (state = {}, action) {
   }
 }
 
+function categories(state = [], action) {
+  switch (action.type) {
+    case FETCH_CATEGORIES:
+      return action.payload.data;
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   posts,
   activePost,
   postComments,
   activeComment,
+  categories,
   form: formReducer
 })

@@ -123,14 +123,12 @@ export function upVotePost(id, comment) {
         type: UPVOTE_POST,
         payload: request
       }
-      break;
     case true:
       const request2 = axios.post(`${ROOT_URL}/comments/${id}`, { option: "upVote" }, { headers });
       return {
         type: UPVOTE_COMMENT,
         payload: request2
       }
-      break;
     default:
       break;
   }
@@ -146,14 +144,12 @@ export function downVotePost(id, comment) {
         type: DOWNVOTE_POST,
         payload: request
       }
-      break;
     case true:
       const request2 = axios.post(`${ROOT_URL}/comments/${id}`, { option: "downVote" }, { headers });
       return {
         type: DOWNVOTE_COMMENT,
         payload: request2
       }
-      break;
     default:
       break;
   }
@@ -169,7 +165,6 @@ export function deletePost(id, comment, callback) {
         type: DELETE_POST,
         payload: id
       }
-      break;
     case true:
       axios.delete(`${ROOT_URL}/comments/${id}`, { headers })
         .then(() => callback());
@@ -177,7 +172,6 @@ export function deletePost(id, comment, callback) {
         type: DELETE_COMMENT,
         payload: id
       }
-      break;
     default:
       break;
   }

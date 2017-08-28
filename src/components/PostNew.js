@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import DropdownList from 'react-widgets/lib/DropdownList'
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { createPost, fetchPost, editPost } from '../actions';
+import 'react-widgets/dist/css/react-widgets.css'
 
 class PostNew extends Component {
 
@@ -16,6 +18,34 @@ class PostNew extends Component {
   }
 
     renderField(field) {
+
+      const { meta: { touched, error } } = field;
+      const className = `form-group ${touched && error ? 'has-danger' : ''}`
+      return (
+        <div className={className}>
+          <label>{field.label}</label>
+          {
+            field.label === "Body" ?
+             <textarea
+              className='form-control'
+              type="text"
+              rows="5"
+              {...field.input}
+            /> :
+            <input
+              className='form-control'
+              type="text"
+              {...field.input}
+            />
+          }
+          <div className='text-help'>
+            {touched ? error : ''}
+          </div>
+        </div>
+      );
+    }
+
+    renderCategory(field) {
 
       const { meta: { touched, error } } = field;
       const className = `form-group ${touched && error ? 'has-danger' : ''}`
@@ -51,6 +81,10 @@ class PostNew extends Component {
   render() {
 
     const { handleSubmit } = this.props
+    const colors = [ { color: 'Red', value: 'ff0000' },
+  { color: 'Green', value: '00ff00' },
+  { color: 'Blue', value: '0000ff' } ]
+
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -59,8 +93,8 @@ class PostNew extends Component {
           name="title"
           component={this.renderField}
         />
+        <label>Category</label>
         <Field
-          label="Category"
           name="category"
           component={this.renderField}
         />

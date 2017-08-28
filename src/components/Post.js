@@ -28,7 +28,6 @@ class Post extends Component {
     const { post, comment, voteScore } = this.props;
     const { id } = post;
     let { category } = post;
-    const { parentId } = post;
 
     if (!post) {
       return (
@@ -43,9 +42,11 @@ class Post extends Component {
     console.log("The post is:", post);
 
     return(
-      <div className ='post'>
-        <div className='col-md-12'>Author: {post.author}</div>
-        <div className='div row'>
+      <div>
+        <div className='col-md-12'>
+          <div className='pull-right'>Author: {post.author}</div>
+        </div>
+        <div className='div row post'>
             <div className='col-md-3'>
               <ButtonGroup>
                 <Button

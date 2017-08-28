@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchComments } from '../actions'
-import Post from './Post.js'
+import Comment from './Comment.js'
 
 class ListComments extends Component {
 
@@ -18,9 +18,9 @@ class ListComments extends Component {
 
     return(
       <div>
-        { postComments.length === 0 ? <div></div> : <h3>Comments</h3> }
+        { postComments.length === 0 ? <div></div> : <h3 className='comment-title'>Comments</h3> }
         {postComments.map(comment =>
-          <Post key={comment.id} post={comment} voteScore={comment.voteScore} id={id} comment={true} />
+          <Comment key={comment.id} post={comment} voteScore={comment.voteScore} id={id} comment={true} />
         )}
       </div>
     )

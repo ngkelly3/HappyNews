@@ -17,7 +17,7 @@ class Post extends Component {
   deletePost = (post, category, comment) => {
 
     this.props.deletePost(post.id, comment, () => {
-      this.props.history.push('/');
+      this.props.history.push(`/${category}/${post.parentId}`);
     });
   }
 
@@ -42,15 +42,16 @@ class Post extends Component {
 
     return(
       <div className ='post'>
-        <div>Author: {post.author}</div>
         <div className='row'>
+              <div className='col-md-12'>Author: {post.author}</div>
             <div className='col-md-3'>
               <Button bsClass='btn' onClick={() => this.upVote(id, comment)}>Upvote</Button>
               {voteScore}
               <Button bsClass='btn' onClick={() => this.downVote(id, comment)}>Downvote</Button>
             </div>
-            <Link to={`/${category}/${id}`} className='col-md-6'>{post.title}</Link>
-            <div>
+            <div className='col-md-6'>
+              {post.body}
+            </div>
             <div className='col-md-3'>
               <Button bsClass='btn btn-danger btn-xs'
                       onClick={() => this.deletePost(post, category, comment)}
@@ -58,18 +59,14 @@ class Post extends Component {
               >
                 delete
               </Button>
-              <Link className='btn btn-primary btn-xs pull-right'
-                      to={`/post/edit/${category}/${id}`}
-              >
-                edit
-              </Link>
+                <Link className='btn btn-primary btn-xs pull-right'
+                        to={`/comment/edit/${category}/${id}/${parentId}`}
+                >
+                  edit
+                </Link>
             </div>
         </div>
-        <div className='row post'>
-
-        </div>
       </div>
-    </div>
     )
   }
 }

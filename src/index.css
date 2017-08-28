@@ -191,3 +191,14 @@ li {
   font-size: 14px;
   margin-top: 5px;
 }
+
+.post {
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px
+}
+
+.comment-title {
+  padding-left: 20px;
+  padding-right: 20px
+}

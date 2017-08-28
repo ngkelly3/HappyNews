@@ -24,9 +24,12 @@ class PostShow extends Component {
     return (
       <div>
         <Post post={post} voteScore={post.voteScore} comment={false} />
-        <div>{post.body}</div>
+        <div className='row post'>
+          <div className='col-md-3' />
+          <div className='col-md-6'>{post.body}</div>
+        </div>
         <ListComments id={id}/>
-        <Link to={`/comment/new/${category}/${id}`} className='btn btn-primary'>
+        <Link to={`/comment/new/${category}/${id}`} className='btn btn-primary pull-right'>
           Add a comment
         </Link>
       </div>

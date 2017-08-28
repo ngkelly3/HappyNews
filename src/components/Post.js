@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import ArrowDownIcon from 'react-icons/lib/md/keyboard-arrow-down';
+import ArrowUpIcon from 'react-icons/lib/md/keyboard-arrow-up';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { upVotePost, downVotePost, deletePost } from '../actions';
 
@@ -42,32 +44,39 @@ class Post extends Component {
 
     return(
       <div className ='post'>
-        <div>Author: {post.author}</div>
-        <div className='row'>
+        <div className='col-md-12'>Author: {post.author}</div>
+        <div className='div row'>
             <div className='col-md-3'>
-              <Button bsClass='btn' onClick={() => this.upVote(id, comment)}>Upvote</Button>
-              {voteScore}
-              <Button bsClass='btn' onClick={() => this.downVote(id, comment)}>Downvote</Button>
+              <ButtonGroup>
+                <Button
+                  onClick={() => this.upVote(id, comment)}
+                >
+                  <ArrowUpIcon size={30} />
+                </Button>
+                <Button
+                  onClick={() => this.downVote(id, comment)}
+                  >
+                    <ArrowDownIcon size={30}/>
+                </Button>
+              </ButtonGroup>
+              <Button className='score'>
+                {voteScore}
+              </Button>
             </div>
             <Link to={`/${category}/${id}`} className='col-md-6'>{post.title}</Link>
-            <div>
             <div className='col-md-3'>
-              <Button bsClass='btn btn-danger btn-xs'
-                      onClick={() => this.deletePost(post, category, comment)}
-                      className='pull-right'
-              >
-                delete
-              </Button>
-              <Link className='btn btn-primary btn-xs pull-right'
-                      to={`/post/edit/${category}/${id}`}
-              >
-                edit
-              </Link>
+                <Button bsClass='btn btn-danger btn-xs'
+                        className='pull-right'
+                        onClick={() => this.deletePost(post, category, comment)}
+                >
+                  delete
+                </Button>
+                <Link className='btn btn-primary btn-xs pull-right'
+                        to={`/post/edit/${category}/${id}`}
+                >
+                  edit
+                </Link>
             </div>
-        </div>
-        <div className='row post'>
-
-        </div>
       </div>
     </div>
     )

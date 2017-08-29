@@ -99,7 +99,7 @@ class PostNew extends Component {
     console.log(categories);
 
     return(
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form className='nav-padding' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title"
           name="title"

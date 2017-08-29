@@ -22,7 +22,7 @@ class PostShow extends Component {
     const { category } = post;
 
     return (
-      <div>
+      <div className='nav-padding'>
         <Post post={post} voteScore={post.voteScore} comment={false} />
         <div className='row post'>
           <div className='col-md-3' />

@@ -21,9 +21,10 @@ class CommentNew extends Component {
     return (
       <div className={className}>
         <label>{field.label}</label>
-        <input
+        <textarea
           className='form-control'
           type="text"
+          rows="5"
           {...field.input}
         />
         <div className='text-help'>
@@ -61,7 +62,7 @@ class CommentNew extends Component {
     }
 
     return(
-      <form onSubmit={handleSubmit(this.onCommentSubmit.bind(this))}>
+      <form className='nav-padding' onSubmit={handleSubmit(this.onCommentSubmit.bind(this))}>
         <Field
           label="Body"
           name="body"

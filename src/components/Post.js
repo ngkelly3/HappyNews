@@ -44,7 +44,7 @@ class Post extends Component {
     return(
       <div>
         <div className='col-md-12'>
-          <div className='pull-right'>Author: {post.author}</div>
+          <div className='pull-right'>By: {post.author}</div>
         </div>
         <div className='div row post'>
             <div className='col-md-3'>

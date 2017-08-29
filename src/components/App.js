@@ -13,14 +13,14 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <Navbar default collapseOnSelect>
+        <Navbar default collapseOnSelect fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="/">Home</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
-          <Link className='nav-item btn btn-primary pull-right' to="/post/new">Add a Post</Link>
+          <Link className='nav-item btn navbar-btn btn-primary pull-right' to="/post/new">Add a Post</Link>
         </Navbar>
         <Switch>
           <Route path="/post/new/" component={PostNew} />

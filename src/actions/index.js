@@ -42,7 +42,7 @@ export function fetchCategoryPosts(category) {
   // console.log("Request: ", request);
 
   return {
-    type: FETCH_POSTS,
+    type: FETCH_CATEGORY_POSTS,
     payload: request
   }
 }

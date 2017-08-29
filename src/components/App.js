@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
-import { Navbar, NavDropdown, MenuItem }  from 'react-bootstrap';
+import { Navbar }  from 'react-bootstrap';
 import ListPosts from './ListPosts';
 import PostShow from './PostShow';
 import PostNew from './PostNew';

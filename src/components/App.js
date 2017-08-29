@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
-import { Navbar }  from 'react-bootstrap';
+import { Navbar, NavDropdown, MenuItem }  from 'react-bootstrap';
 import ListPosts from './ListPosts';
+import ListCategories from './ListCategories';
 import PostShow from './PostShow';
 import PostNew from './PostNew';
 import CommentNew from './CommentNew';
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path="/comment/edit/:category/:commentId/:parentId" component={CommentNew} />
           <Route path="/comment/new/:category/:parentId" component={CommentNew} />
           <Route path="/:category/:id" component={PostShow} />
+          <Route path="/:category" component={ListCategories} />
           <Route path="/" component={ListPosts} />
         </Switch>
       </div>

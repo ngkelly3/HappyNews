@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchPosts, fetchCategories } from '../actions/index.js';
+import { Link, withRouter } from 'react-router-dom';
+import { fetchCategories, fetchCategoryPosts } from '../actions/index.js';
 import Post from './Post.js'
 
-class ListPosts extends Component {
+class ListCategories extends Component {
 
   componentDidMount() {
-    this.props.fetchPosts();
+    const { category } = this.props.match.params;
+    // console.log(category);
+    this.props.fetchCategoryPosts(category);
     this.props.fetchCategories();
+  }
+
+  componentWillReceiveProps() {
+    const { category } = this.props.match.params;
+    this.props.fetchCategoryPosts(category);
   }
 
   render() {
 
-    const { posts } = this.props;
+    const { categoryPosts } = this.props;
     const { categories } = this.props.categories;
-    if (!posts || !categories) {
+    if (!categoryPosts || !categories) {
       return <div>Loading...</div>
     }
 
+    console.log(categoryPosts);
     //const { category } = this.props.match.params;
       return (
         <div className='nav-padding'>
@@ -31,7 +39,8 @@ class ListPosts extends Component {
           </div>
           <div className='col-md-12'>
             <h2>Posts</h2>
-            {posts.map((post) =>
+            {categoryPosts.length === 0 ? <div>There are no posts for this category!</div> :
+              categoryPosts.map((post) =>
               <Post key={post.id} post={post} voteScore={post.voteScore} comment={false} />
             )}
           </div>
@@ -41,12 +50,13 @@ class ListPosts extends Component {
   }
 }
 
-function mapStateToProps({ posts, categories }) {
+function mapStateToProps({ categoryPosts, categories }) {
   //console.log("Should toggle on an upvote", posts);
+  console.log(categoryPosts);
   return {
-    posts,
-    categories
+    categoryPosts,
+    categories,
   }
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategories })(ListPosts)
+export default withRouter(connect(mapStateToProps, { fetchCategoryPosts, fetchCategories })(ListCategories))

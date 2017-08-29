@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const FETCH_COMMENT = 'FETCH_COMMENT';
@@ -32,6 +33,16 @@ export function fetchPosts () {
 
   return {
     type: FETCH_POSTS,
+    payload: request
+  }
+}
+
+export function fetchCategoryPosts(category) {
+  const request = axios.get(`${ROOT_URL}/${category}/posts`, { headers });
+  // console.log("Request: ", request);
+
+  return {
+    type: FETCH_CATEGORY_POSTS,
     payload: request
   }
 }

@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import { FETCH_POSTS,
          FETCH_POST,
+         FETCH_CATEGORY_POSTS,
          FETCH_COMMENTS,
          FETCH_COMMENT,
          FETCH_CATEGORIES,
@@ -49,6 +50,19 @@ function posts (state = [], action) {
     case DELETE_POST:
       console.log("testing id payload", action.payload)
       newState = state.filter(post => post.id !== action.payload);
+      return newState;
+    default:
+      return state;
+  }
+}
+
+function categoryPosts (state = [], action) {
+  switch (action.type) {
+    case FETCH_CATEGORY_POSTS:
+      // console.log("Payload should be stored in this object ", action);
+      // sort the list by score and return it
+      let newState = action.payload.data.filter(post => !post.deleted)
+        .sort((a,b) => b.voteScore - a.voteScore);
       return newState;
     default:
       return state;
@@ -136,5 +150,6 @@ export default combineReducers({
   postComments,
   activeComment,
   categories,
+  categoryPosts,
   form: formReducer
 })

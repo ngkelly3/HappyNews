@@ -39,7 +39,7 @@ class Post extends Component {
       category = this.props.match.params.category;
     }
 
-    console.log("The post is:", post);
+    // console.log("The post is:", post);
 
     return(
       <div>

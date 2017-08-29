@@ -26,6 +26,10 @@ function posts (state = [], action) {
       let newState = action.payload.data.filter(post => !post.deleted)
         .sort((a,b) => b.voteScore - a.voteScore);
       return newState;
+    case FETCH_CATEGORY_POSTS:
+      newState = action.payload.data.filter(post => !post.deleted)
+        .sort((a,b) => b.voteScore - a.voteScore);
+      return newState;
     case UPVOTE_POST:
       // console.log("After trying an upvote", action.payload.data.id);
       newState = [...state];
@@ -50,19 +54,6 @@ function posts (state = [], action) {
     case DELETE_POST:
       console.log("testing id payload", action.payload)
       newState = state.filter(post => post.id !== action.payload);
-      return newState;
-    default:
-      return state;
-  }
-}
-
-function categoryPosts (state = [], action) {
-  switch (action.type) {
-    case FETCH_CATEGORY_POSTS:
-      // console.log("Payload should be stored in this object ", action);
-      // sort the list by score and return it
-      let newState = action.payload.data.filter(post => !post.deleted)
-        .sort((a,b) => b.voteScore - a.voteScore);
       return newState;
     default:
       return state;
@@ -150,6 +141,5 @@ export default combineReducers({
   postComments,
   activeComment,
   categories,
-  categoryPosts,
   form: formReducer
 })

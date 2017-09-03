@@ -4,10 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Quickstart
 
-* Install and run server [HappyNews-server](https://github.com/ngkelly3/HappyNews-server)
+* Install and run server [Readable API Server](https://github.com/udacity/reactnd-project-readable-starter)
 * Clone the HappyNews repository
-* Install dependencies using 'yarn install'
-* Run the app using 'yarn start', navigate to [http://localhost:3000](http://localhost:3000)
+* Install dependencies using 'npm install'
+* Run the app using 'npm start', navigate to [http://localhost:3000](http://localhost:3000)
 
 ## Miscellaneous
 
@@ -17,3 +17,4 @@ HappyNews app is a Reddit-inspired application that allows you to make posts, up
 * Login for users
 * UI / UX Improvements
 * Responsive layout
+* Single upvote per user

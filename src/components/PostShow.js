@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { fetchPost } from '../actions/index.js';
 import { Link } from 'react-router-dom';
 import Post from './Post.js'
+import PathError from './PathError'
 import ListComments from './ListComments.js'
 
 class PostShow extends Component {
@@ -16,12 +18,19 @@ class PostShow extends Component {
     const { post } = this.props;
     if (!post) {
       return <div>Loading...</div>
-    } else if (post.deleted === undefined) {
-      console.log("Post was deleted")
     }
 
     const { id } = this.props.match.params;
     const { category } = post;
+
+    console.log(post)
+    if(_.isEmpty(post)) {
+      return(
+        <div className='nav-padding'>
+          <PathError />
+        </div>
+      )
+    }
 
     return (
       <div className='nav-padding'>

@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div className='app'>
         <Switch>
-          <Route exact path="/notfound" component={PathError} />
+          <Route exact path="/404" component={PathError} />
           <Route path="/" component={() => (
             <div>
               <Navbar default collapseOnSelect fixedTop>
@@ -28,7 +28,6 @@ class App extends Component {
                 <Link className='nav-item btn navbar-btn btn-primary pull-right' to="/post/new">Add a Post</Link>
               </Navbar>
               <Switch>
-                <Route path="/notfound" component={PathError} />
                 <Route path="/post/new/" component={PostNew} />
                 <Route path="/post/edit/:category/:id" component={PostNew} />
                 <Route path="/comment/edit/:category/:commentId/:parentId" component={CommentNew} />

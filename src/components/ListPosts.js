@@ -40,7 +40,7 @@ class ListPosts extends Component {
             <h2>Categories</h2>
             {
               categories.map((category) =>
-                <div className='col-md-3'>
+                <div key={category.name} className='col-md-3'>
                 <Link className='btn btn-info btn-lg btn-block' to={`/${category.name}`} key={category.name}>{category.name}</Link>
                 </div>
             )}

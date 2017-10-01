@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import _ from 'lodash';
 
 import { FETCH_POSTS,
          FETCH_POST,
@@ -64,7 +65,10 @@ function activePost (state = {}, action) {
   switch (action.type) {
     case FETCH_POST:
       console.log("Payload for fetching a post is", action.payload.data);
-      return action.payload.data;
+      if(_.isEmpty(action.payload.data))
+        console.log("Testing that the object is empty")
+
+      return action.payload.data
     case UPVOTE_POST:
       let newState = {...state};
       newState.voteScore++;
@@ -118,6 +122,10 @@ function activeComment (state = {}, action) {
   switch (action.type) {
     case FETCH_COMMENT:
       console.log("Payload for fetching a comment is", action.payload.data);
+
+      if(_.isEmpty(action.payload.data))
+        console.log("Testing that the object is empty")
+
       return action.payload.data;
     case EDIT_COMMENT:
       return state;

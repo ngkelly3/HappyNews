@@ -5,7 +5,7 @@ class PathError extends Component {
   render() {
     return(
       <div>
-        Path not found
+        Error 404 - Path not found
       </div>
     )
   }

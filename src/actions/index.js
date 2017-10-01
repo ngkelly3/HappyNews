@@ -16,7 +16,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const EDIT_POST = 'EDIT_POST';
-const ROOT_URL = 'http://localhost:5001';
+const ROOT_URL = 'http://localhost:3001';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 let token = localStorage.token

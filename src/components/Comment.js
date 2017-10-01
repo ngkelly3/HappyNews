@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import ArrowDownIcon from 'react-icons/lib/md/keyboard-arrow-down';
 import ArrowUpIcon from 'react-icons/lib/md/keyboard-arrow-up';
 import { connect } from 'react-redux';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { upVotePost, downVotePost, deletePost } from '../actions';
+import PathError from './PathError';
 
 class Post extends Component {
 
@@ -36,11 +38,19 @@ class Post extends Component {
       )
     }
 
+    if (_.isEmpty(post)) {
+      return (
+        <div className='nav-padding'>
+          <PathError />
+        </div>
+      )
+    }
+
     if (!category) {
       category = this.props.match.params.category;
     }
 
-    console.log("The post is:", post);
+    // console.log("The post is:", post);
 
     return(
       <div>

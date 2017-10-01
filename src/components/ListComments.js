@@ -20,7 +20,11 @@ class ListComments extends Component {
       <div>
         { postComments.length === 0 ? <div></div> : <h3 className='comment-title'>Comments</h3> }
         {postComments.map(comment =>
-          <Comment key={comment.id} post={comment} voteScore={comment.voteScore} id={id} comment={true} />
+          <Comment key={comment.id}
+                   post={comment}
+                   voteScore={comment.voteScore} 
+                   id={id}
+                   comment={true} />
         )}
       </div>
     )

@@ -48,7 +48,7 @@ class PostNew extends Component {
     renderCategory(field) {
 
       const { categories } = field.data;
-      console.log(categories);
+      // console.log(categories);
 
       const { meta: { touched, error } } = field;
       const className = `form-group ${touched && error ? 'has-danger' : ''}`
@@ -96,7 +96,7 @@ class PostNew extends Component {
       )
     }
 
-    console.log(categories);
+    // console.log(categories);
 
     return(
       <form className='nav-padding' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -130,7 +130,7 @@ function mapStateToProps({ activePost, categories }, ownProps) {
 
   const { title, category, body } = activePost;
   const { id } = ownProps.match.params;
-  console.log(activePost)
+  // console.log(activePost)
 
   if (id) {
     return {

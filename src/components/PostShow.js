@@ -16,6 +16,8 @@ class PostShow extends Component {
     const { post } = this.props;
     if (!post) {
       return <div>Loading...</div>
+    } else if (post.deleted === undefined) {
+      console.log("Post was deleted")
     }
 
     const { id } = this.props.match.params;

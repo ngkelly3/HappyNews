@@ -63,7 +63,7 @@ function posts (state = [], action) {
 function activePost (state = {}, action) {
   switch (action.type) {
     case FETCH_POST:
-      //console.log("Payload for fetching a post is", action.payload.data);
+      console.log("Payload for fetching a post is", action.payload.data);
       return action.payload.data;
     case UPVOTE_POST:
       let newState = {...state};

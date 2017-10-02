@@ -36,22 +36,26 @@ class ListPosts extends Component {
     //const { category } = this.props.match.params;
       return (
         <div className='nav-padding'>
-          <div className='col-md-12'>
-            <h2>Categories</h2>
-            {
-              categories.map((category) =>
-                <div key={category.name} className='col-md-3'>
+          <div className='row'>
+            <div className='col-md-12'>
+              <h2>Categories</h2>
+            </div>
+          </div>
+          <div className='row'>
+            {categories.map((category) =>
+                <div key={category.name} className='col-md-4'>
                 <Link className='btn btn-info btn-lg btn-block' to={`/${category.name}`} key={category.name}>{category.name}</Link>
-                </div>
-            )}
+                </div>)}
           </div>
-          <div className='col-md-12'>
-            <h2>Posts</h2>
-            {posts.length === 0 ? <div>There are no posts for this category!</div> :
-              posts.map((post) =>
-              <Post key={post.id} post={post} voteScore={post.voteScore} comment={false} />
-            )}
+          <div className='row'>
+            <div className='col-md-12'>
+              <h2>Posts</h2>
+            </div>
           </div>
+          {posts.length === 0 ? <div>There are no posts for this category!</div> :
+            posts.map((post) =>
+            <Post key={post.id} post={post} voteScore={post.voteScore} comment={false} />
+          )}
         </div>
       )
 

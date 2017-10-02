@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
+import PathError from './PathError';
 import { createComment, fetchComment, editComment } from '../actions';
 
 class CommentNew extends Component {
@@ -50,7 +52,7 @@ class CommentNew extends Component {
 
   render() {
 
-    const { handleSubmit } = this.props;
+    const { handleSubmit, activeComment } = this.props;
     let { commentId, category, parentId } = this.props.match.params;
 
     if (!commentId) {
@@ -59,6 +61,15 @@ class CommentNew extends Component {
 
     if (!parentId) {
       parentId = this.props.id;
+    }
+
+    // only output a path error if a comment or its parent was deleted
+    if (activeComment && _.isEmpty(this.props.activeComment)) {
+      return (
+        <div className="nav-padding">
+          <PathError />
+        </div>
+      )
     }
 
     return(
@@ -79,17 +90,20 @@ class CommentNew extends Component {
 }
 
 function mapStateToProps({ activeComment }, ownProps) {
-  console.log(activeComment);
+  // console.log("This activecomment is: ", activeComment);
 
   const { commentId } = ownProps.match.params;
   const { body } = activeComment;
 
+  // console.log("This commentId is: ", commentId);
+
   if (commentId) {
-  return {
-    initialValues: {
-      body
+    return {
+      initialValues: {
+        body
+      },
+      activeComment
     }
-  }
   } else {
     return {
       initialValues: {

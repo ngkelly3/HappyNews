@@ -42,11 +42,10 @@ class Post extends Component {
     // console.log("The post is:", post);
 
     return(
-      <div>
-        <div className='col-md-12'>
-          <div className='pull-right'>By: {post.author}</div>
-        </div>
-        <div className='div row post'>
+      <div className='row'>
+          <div className='col-md-12'>
+            <div className='pull-right'>By: {post.author}</div>
+          </div>
             <div className='col-md-3'>
               <ButtonGroup>
                 <Button
@@ -79,7 +78,6 @@ class Post extends Component {
                 </Link>
             </div>
       </div>
-    </div>
     )
   }
 }

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import _ from 'lodash';
 import ArrowDownIcon from 'react-icons/lib/md/keyboard-arrow-down';
 import ArrowUpIcon from 'react-icons/lib/md/keyboard-arrow-up';
-import { connect } from 'react-redux';
-import { Button, ButtonGroup } from 'react-bootstrap';
-import { Link, withRouter } from 'react-router-dom';
-import { upVotePost, downVotePost, deletePost } from '../actions';
+import {connect} from 'react-redux';
+import {Button, ButtonGroup} from 'react-bootstrap';
+import {Link, withRouter} from 'react-router-dom';
+import {upVotePost, downVotePost, deletePost} from '../actions';
 import PathError from './PathError';
 
 class Post extends Component {
@@ -27,10 +27,10 @@ class Post extends Component {
 
   render() {
 
-    const { post, comment, voteScore } = this.props;
-    const { id } = post;
-    let { category } = post;
-    const { parentId } = post;
+    const {post, comment, voteScore} = this.props;
+    const {id} = post;
+    let {category} = post;
+    const {parentId} = post;
 
     if (!post) {
       return (
@@ -41,7 +41,7 @@ class Post extends Component {
     if (_.isEmpty(post)) {
       return (
         <div className='nav-padding'>
-          <PathError />
+          <PathError/>
         </div>
       )
     }
@@ -52,56 +52,44 @@ class Post extends Component {
 
     // console.log("The post is:", post);
 
-    return(
-      <div>
+    return (
+      <div className='row'>
         <div className='col-md-12'>
           <div className='pull-right'>By: {post.author}</div>
         </div>
-        <div className='row post'>
-            <div className='col-md-3'>
-              <ButtonGroup>
-                <Button
-                  onClick={() => this.upVote(id, comment)}
-                >
-                  <ArrowUpIcon size={30} />
-                </Button>
-                <Button
-                  onClick={() => this.downVote(id, comment)}
-                  >
-                    <ArrowDownIcon size={30}/>
-                </Button>
-              </ButtonGroup>
-              <Button className='score'>
-                {voteScore}
-              </Button>
-            </div>
-            <div className='col-md-6'>
-              {post.body}
-            </div>
-            <div className='col-md-3'>
-              <Button bsClass='btn btn-danger btn-xs'
-                      onClick={() => this.deletePost(post, category, comment)}
-                      className='pull-right'
-              >
-                delete
-              </Button>
-                <Link className='btn btn-primary btn-xs pull-right'
-                        to={`/comment/edit/${category}/${id}/${parentId}`}
-                >
-                  edit
-                </Link>
-            </div>
+        <div className='col-md-3'>
+          <ButtonGroup>
+            <Button onClick={() => this.upVote(id, comment)}>
+              <ArrowUpIcon size={30}/>
+            </Button>
+            <Button onClick={() => this.downVote(id, comment)}>
+              <ArrowDownIcon size={30}/>
+            </Button>
+          </ButtonGroup>
+          <Button className='score'>
+            {voteScore}
+          </Button>
+        </div>
+        <div className='col-md-6'>
+          {post.body}
+        </div>
+        <div className='col-md-3'>
+          <Button bsClass='btn btn-danger btn-xs' onClick={() => this.deletePost(post, category, comment)} className='pull-right'>
+            delete
+          </Button>
+          <Link className='btn btn-primary btn-xs pull-right' to={`/comment/edit/${category}/${id}/${parentId}`}>
+            edit
+          </Link>
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ comments }, ownProps) {
-  return {
-    comments
-  }
+function mapStateToProps({
+  comments
+}, ownProps) {
+  return {comments}
 }
 
-
-export default withRouter(connect(mapStateToProps, { upVotePost, downVotePost, deletePost })(Post))
+export default withRouter(connect(mapStateToProps, {upVotePost, downVotePost, deletePost})(Post))

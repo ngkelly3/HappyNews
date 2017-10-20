@@ -16,14 +16,14 @@ class ListPosts extends Component {
     this.props.fetchCategories();
   }
 
-  componentWillReceiveProps() {
-    const { category } = this.props.match.params;
-    if (!category) {
-      this.props.fetchPosts();
-    } else {
-      this.props.fetchCategoryPosts(category);
-    }
-  }
+  // componentWillReceiveProps() {
+  //   const { category } = this.props.match.params;
+  //   if (!category) {
+  //     this.props.fetchPosts();
+  //   } else {
+  //     this.props.fetchCategoryPosts(category);
+  //   }
+  // }
 
   render() {
 

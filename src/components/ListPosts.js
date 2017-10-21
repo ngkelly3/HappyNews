@@ -33,7 +33,6 @@ class ListPosts extends Component {
       return <div>Loading...</div>
     }
 
-    //const { category } = this.props.match.params;
       return (
         <div className='nav-padding'>
           <div className='row'>
@@ -54,7 +53,7 @@ class ListPosts extends Component {
           </div>
           {posts.length === 0 ? <div>There are no posts for this category!</div> :
             posts.map((post) =>
-            <Post key={post.id} post={post} voteScore={post.voteScore} comment={false} />
+            <Post key={post.id} post={post} voteScore={post.voteScore} commentCount={post.commentCount} comment={false} />
           )}
         </div>
       )

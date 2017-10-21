@@ -17,7 +17,6 @@ class Post extends Component {
   }
 
   deletePost = (post, category, comment) => {
-
     this.props.deletePost(post.id, comment, () => {
       this.props.history.push('/');
     });
@@ -25,7 +24,7 @@ class Post extends Component {
 
   render() {
 
-    const {post, comment, voteScore} = this.props;
+    const {post, comment, voteScore, commentCount} = this.props;
     const {id} = post;
     let {category} = post;
 
@@ -39,8 +38,8 @@ class Post extends Component {
       category = this.props.match.params.category;
     }
 
-    // console.log("The post is:", post);
-
+    console.log(commentCount)
+    
     return (
       <div className='row'>
         <div className='col-md-12'>
@@ -59,7 +58,16 @@ class Post extends Component {
             {voteScore}
           </Button>
         </div>
-        <Link to={`/${category}/${id}`} className='col-md-6'>{post.title}</Link>
+        <div className='col-md-6'>
+          <div className='row'>
+            <Link to={`/${category}/${id}`} className='col-md-12'>
+              {post.title}
+            </Link>
+            <div className='col-md-12'>
+              Number of comments: {commentCount}
+            </div>
+          </div>
+        </div>
         <div className='col-md-3'>
           <Button bsClass='btn btn-danger btn-xs' className='pull-right' onClick={() => this.deletePost(post, category, comment)}>
             delete
@@ -73,10 +81,4 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps({
-  comments
-}, ownProps) {
-  return {comments}
-}
-
-export default withRouter(connect(mapStateToProps, {upVotePost, downVotePost, deletePost})(Post))
+export default withRouter(connect(null, {upVotePost, downVotePost, deletePost})(Post))

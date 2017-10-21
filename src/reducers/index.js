@@ -85,7 +85,7 @@ function activePost (state = {}, action) {
   }
 }
 
-function postComments (state = [], action) {
+function postComments (state = null, action) {
   switch(action.type) {
     case FETCH_COMMENTS:
       // console.log(action.payload.data)

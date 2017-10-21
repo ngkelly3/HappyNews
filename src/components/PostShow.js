@@ -28,7 +28,7 @@ class PostShow extends Component {
     const { id } = this.props.match.params;
     const { category } = post;
 
-    console.log(post)
+    // console.log(post)
     if(_.isEmpty(post)) {
       return(
         <div className='nav-padding'>
@@ -37,9 +37,11 @@ class PostShow extends Component {
       )
     }
 
+    console.log(post)
+
     return (
       <div className='nav-padding'>
-        <Post post={post} showContent={true} voteScore={post.voteScore} comment={false} />
+        <Post post={post} showContent={true} voteScore={post.voteScore} commentCount={post.commentCount} comment={false} />
         <div className='row'>
           <div className='col-md-3'></div>
           <div className='col-md-6'>{post.body}</div>

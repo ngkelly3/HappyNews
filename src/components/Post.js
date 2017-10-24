@@ -38,8 +38,6 @@ class Post extends Component {
       category = this.props.match.params.category;
     }
 
-    var date = Date(timestamp)
-
     return (
       <div className='row'>
         <div className='col-md-12'>

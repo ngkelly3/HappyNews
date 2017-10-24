@@ -37,6 +37,12 @@ class ListPosts extends Component {
         <div className='nav-padding'>
           <div className='row'>
             <div className='col-md-12'>
+              <div className='nav-item btn navbar-btn btn-primary'>Sort by Votes</div>
+              <div className='nav-item btn navbar-btn btn-primary'>Sort by Most Recent</div>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-md-12'>
               <h2>Categories</h2>
             </div>
           </div>

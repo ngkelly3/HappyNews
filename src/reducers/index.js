@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import _ from 'lodash';
 
 import { FETCH_POSTS,
          FETCH_POST,

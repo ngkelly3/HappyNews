@@ -37,7 +37,7 @@ class PostShow extends Component {
       )
     }
 
-    console.log(post)
+    // console.log(post)
 
     return (
       <div className='nav-padding'>
@@ -65,7 +65,7 @@ class PostShow extends Component {
                        post={comment}
                        voteScore={comment.voteScore}
                        id={id}
-                       comment={true}/>)}\
+                       comment={true}/>)}
         <div className='row'>
           <div className='col-md-12'>
             <Link to={`/comment/new/${category}/${id}`} className='btn btn-primary pull-right'>
@@ -80,7 +80,7 @@ class PostShow extends Component {
 
 function mapStateToProps({ activePost, postComments }) {
 
-  console.log("I should be activated after an upvote", activePost);
+  // console.log("I should be activated after an upvote", activePost);
   return (
     {
       post: activePost,

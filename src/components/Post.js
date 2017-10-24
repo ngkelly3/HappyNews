@@ -24,7 +24,7 @@ class Post extends Component {
 
   render() {
 
-    const {post, comment, voteScore, commentCount} = this.props;
+    const {post, comment, voteScore, commentCount, timestamp} = this.props;
     const {id} = post;
     let {category} = post;
 
@@ -38,8 +38,8 @@ class Post extends Component {
       category = this.props.match.params.category;
     }
 
-    console.log(commentCount)
-    
+    var date = Date(timestamp)
+
     return (
       <div className='row'>
         <div className='col-md-12'>

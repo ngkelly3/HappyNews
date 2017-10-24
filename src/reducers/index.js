@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { FETCH_POSTS,
          FETCH_POST,
          FETCH_CATEGORY_POSTS,
+         SORT_POSTS,
          FETCH_COMMENTS,
          FETCH_COMMENT,
          FETCH_CATEGORIES,
@@ -31,6 +32,10 @@ function posts (state = [], action) {
       newState = action.payload.data.filter(post => !post.deleted)
         .sort((a,b) => b.voteScore - a.voteScore);
       return newState;
+    case SORT_POSTS:
+      newState = action.payload.filter(post => !post.deleted)
+        .sort((a,b) => b.voteScore - a.voteScore);
+      return newState;
     case UPVOTE_POST:
       // console.log("After trying an upvote", action.payload.data.id);
       newState = [...state];
@@ -50,10 +55,10 @@ function posts (state = [], action) {
       })
       return newState;
     case CREATE_POST:
-      // We need to add the new post to the state and return the new state
+      // do nothing and return the current state, navigation will update the posts
       return state;
     case DELETE_POST:
-      console.log("testing id payload", action.payload)
+      // console.log("testing id payload", action.payload)
       newState = state.filter(post => post.id !== action.payload);
       return newState;
     default:
@@ -64,9 +69,9 @@ function posts (state = [], action) {
 function activePost (state = {}, action) {
   switch (action.type) {
     case FETCH_POST:
-      console.log("Payload for fetching a post is", action.payload.data);
-      if(_.isEmpty(action.payload.data))
-        console.log("Testing that the object is empty")
+      // console.log("Payload for fetching a post is", action.payload.data);
+      // if(_.isEmpty(action.payload.data))
+      //   console.log("Testing that the object is empty")
 
       return action.payload.data
     case UPVOTE_POST:
@@ -121,10 +126,10 @@ function postComments (state = null, action) {
 function activeComment (state = {}, action) {
   switch (action.type) {
     case FETCH_COMMENT:
-      console.log("Payload for fetching a comment is", action.payload.data);
-
-      if(_.isEmpty(action.payload.data))
-        console.log("Testing that the object is empty")
+      //console.log("Payload for fetching a comment is", action.payload.data);
+      //
+      // if(_.isEmpty(action.payload.data))
+      //   console.log("Testing that the object is empty")
 
       return action.payload.data;
     case EDIT_COMMENT:

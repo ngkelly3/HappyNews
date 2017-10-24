@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts, fetchCategories, fetchCategoryPosts } from '../actions/index.js';
+import { fetchPosts, fetchCategories, fetchCategoryPosts, sortPosts } from '../actions/index.js';
 import Post from './Post.js'
 
 class ListPosts extends Component {
@@ -25,6 +25,10 @@ class ListPosts extends Component {
   //   }
   // }
 
+  onClickSort() {
+    this.props.sortPosts(this.props.posts)
+  }
+
   render() {
 
     const { posts } = this.props;
@@ -37,7 +41,7 @@ class ListPosts extends Component {
         <div className='nav-padding'>
           <div className='row'>
             <div className='col-md-12'>
-              <div className='nav-item btn navbar-btn btn-primary'>Sort by Votes</div>
+              <div onClick={this.onClickSort.bind(this)} className='nav-item btn navbar-btn btn-primary'>Sort by Votes</div>
               <div className='nav-item btn navbar-btn btn-primary'>Sort by Most Recent</div>
             </div>
           </div>
@@ -75,4 +79,8 @@ function mapStateToProps({ posts, categories }) {
   }
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategories, fetchCategoryPosts })(ListPosts)
+export default connect(mapStateToProps,
+  { fetchPosts,
+    fetchCategories,
+    fetchCategoryPosts,
+    sortPosts })(ListPosts)

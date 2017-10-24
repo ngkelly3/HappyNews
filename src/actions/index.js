@@ -6,7 +6,8 @@ export const FETCH_POST = 'FETCH_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const FETCH_COMMENT = 'FETCH_COMMENT';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
-export const SORT_POSTS = 'SORT_POSTS';
+export const SORT_POSTS_SCORE = 'SORT_POSTS_SCORE';
+export const SORT_POSTS_TIME = 'SORT_POSTS_TIME';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
@@ -48,9 +49,16 @@ export function fetchCategoryPosts(category) {
   }
 }
 
-export function sortPosts(posts) {
+export function sortPostsScore(posts) {
   return {
-    type: SORT_POSTS,
+    type: SORT_POSTS_SCORE,
+    payload: posts
+  }
+}
+
+export function sortPostsTime(posts) {
+  return {
+    type: SORT_POSTS_TIME,
     payload: posts
   }
 }

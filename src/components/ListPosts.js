@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts, fetchCategories, fetchCategoryPosts, sortPosts } from '../actions/index.js';
+import { fetchPosts, fetchCategories, fetchCategoryPosts, sortPostsScore, sortPostsTime } from '../actions/index.js';
 import Post from './Post.js'
 
 class ListPosts extends Component {
@@ -16,17 +16,12 @@ class ListPosts extends Component {
     this.props.fetchCategories();
   }
 
-  // componentWillReceiveProps() {
-  //   const { category } = this.props.match.params;
-  //   if (!category) {
-  //     this.props.fetchPosts();
-  //   } else {
-  //     this.props.fetchCategoryPosts(category);
-  //   }
-  // }
+  onClickSortScore() {
+    this.props.sortPostsScore(this.props.posts)
+  }
 
-  onClickSort() {
-    this.props.sortPosts(this.props.posts)
+  onClickSortTime() {
+    this.props.sortPostsTime(this.props.posts)
   }
 
   render() {
@@ -41,8 +36,8 @@ class ListPosts extends Component {
         <div className='nav-padding'>
           <div className='row'>
             <div className='col-md-12'>
-              <div onClick={this.onClickSort.bind(this)} className='nav-item btn navbar-btn btn-primary'>Sort by Votes</div>
-              <div className='nav-item btn navbar-btn btn-primary'>Sort by Most Recent</div>
+              <div onClick={this.onClickSortScore.bind(this)} className='nav-item btn navbar-btn btn-primary'>Sort by Votes</div>
+              <div onClick={this.onClickSortTime.bind(this)} className='nav-item btn navbar-btn btn-primary'>Sort by Most Recent</div>
             </div>
           </div>
           <div className='row'>
@@ -83,4 +78,5 @@ export default connect(mapStateToProps,
   { fetchPosts,
     fetchCategories,
     fetchCategoryPosts,
-    sortPosts })(ListPosts)
+    sortPostsScore,
+    sortPostsTime })(ListPosts)

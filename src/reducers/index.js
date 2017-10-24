@@ -5,7 +5,8 @@ import _ from 'lodash';
 import { FETCH_POSTS,
          FETCH_POST,
          FETCH_CATEGORY_POSTS,
-         SORT_POSTS,
+         SORT_POSTS_SCORE,
+         SORT_POSTS_TIME,
          FETCH_COMMENTS,
          FETCH_COMMENT,
          FETCH_CATEGORIES,
@@ -32,9 +33,13 @@ function posts (state = [], action) {
       newState = action.payload.data.filter(post => !post.deleted)
         .sort((a,b) => b.voteScore - a.voteScore);
       return newState;
-    case SORT_POSTS:
+    case SORT_POSTS_SCORE:
       newState = action.payload.filter(post => !post.deleted)
         .sort((a,b) => b.voteScore - a.voteScore);
+      return newState;
+    case SORT_POSTS_TIME:
+      newState = action.payload.filter(post => !post.deleted)
+        .sort((a,b) => b.timestamp - a.timestamp);
       return newState;
     case UPVOTE_POST:
       // console.log("After trying an upvote", action.payload.data.id);
